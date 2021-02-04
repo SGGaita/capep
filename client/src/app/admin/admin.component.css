@@ -1,0 +1,16 @@
+.links a {
+    text-decoration: none;
+}
+
+.admin-con-header{
+    font-size:15px;
+}
+
+.admin_content {
+    margin-top: 15px;
+    text-align: center;
+    border: 1px solid #566875;
+    border-radius: 5px;
+    color: rgba(34, 34, 34, 0.68);
+}
+

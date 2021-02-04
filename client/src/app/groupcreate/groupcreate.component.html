@@ -1,0 +1,127 @@
+<div class="content-area">
+  <div class="row page-header">
+    <div class="col-sm-12">
+      <!--<div class="row">
+        <div class="col-sm-12">
+          <a type="button" class="btn btn-custom fa fa-arrow-left" (click)="grouplist()"> Groups list</a>
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item fa fa-minus" (click)="goSavings()"> Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goSavings()"> Savings Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goLoans()"> Loans Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goDividends()"> Dividend Members list</a>
+          </div>
+        </div>
+      </div>-->
+      <div class="col-sm-12 page-content-header">
+        <h1>New Group</h1>
+        <mat-divider></mat-divider>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="space"></div>
+      <div class="col-sm-6 alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+      <div class="col-sm-6 alert alert-success" *ngIf="successMsg">
+        {{successMsg}}
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <form [formGroup]="groupForm" (ngSubmit)="save()" class="form-pad">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                  <label>Branch Name :</label>
+                  <select class="form-control" required id="branch_id_fk" formControlName="branch_id_fk"
+                    placeholder="Select branch">
+                    <option *ngIf="branchs?.length == 0">No item to select</option>
+                    <option *ngFor="let branch of branchs; let i= index" [value]="branch.branch_id" [selected]="i == 0">
+                      {{branch.branch_name}}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && f.branch_id_fk.errors">
+                    <div *ngIf="f.branch_id_fk.errors.required" class="alert alert-danger">Branch name is required</div>
+                  </div>
+                </div>
+
+              <!--  <div class="col-sm-12 col-md-6 col-lg-6">
+                  <label for="">Branch name 2</label>
+                  <input type="text" id="branch_id_fk" formControlName="branch_id_fk" list="branch-list">
+                  <datalist id="branch-list">
+                    <option *ngIf="branchs?.length == 0">No item to select</option>
+                    <option *ngFor="let branch of branchs; let i= index" [value]="branch.branch_id" [selected]="i == 0">
+                      {{branch.branch_name}}
+                    </option>
+                  </datalist>
+                  <button (click)="value()">Click</button>
+
+                </div>-->
+            
+
+
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Group Name :<label class="red-text">*</label></label>
+                    <input class="form-control" type="text" id="group_name" formControlName="group_name"
+                      placeholder="Enter full group name"> </div>
+                  <div *ngIf="submitted &&
+                f.group_name.errors">
+                    <div *ngIf="f.group_name.errors.required" class="alert
+                  alert-danger">Group name is required</div>
+                  </div>
+                </div>
+                <div class="col-sm-12
+              col-md-12 col-lg-6">
+                  <div class="form-group">
+                    <label>Group code/number : <label class="red-text">*</label>
+                    </label> <input type="text" id="group_code" formControlName="group_code"
+                      placeholder="Enter group code">
+                  </div>
+                  <div *ngIf="submitted &&
+                f.group_code.errors">
+                    <div *ngIf="f.group_code.errors.required" class="alert
+                  alert-danger">Group
+                      code number is required</div>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3">
+                  <div class="form-group">
+                    <label for="">Registration date :<label class="red-text">*</label></label> <input
+                      class="form-control" type="date" formControlName="group_reg_date" id="group_reg_date"
+                      [min]="minDate" [max]="maxDate">
+                  </div>
+                </div>
+                <div class="col-sm-6"> <label for="">Group
+                    officer :<label class="red-text"></label></label>
+                  <div class="form-group"> <select class="form-control" id="staff_id_fk" formControlName="staff_id_fk"
+                      placeholder="Assign Officer">
+                      <option *ngIf="staffs?.length == 0">No item to select</option>
+                      <option *ngFor="let staff of staffs; let i= index" [value]="staff.staff_id" [selected]="i
+                    == 0">
+                        {{staff.staff_name}} </option>
+                    </select> </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                  <div class="form-group"> <label>Locat ion :</label> <input type="text" id="group_location"
+                      formControlName="group_location" placeholder="Enter location"> </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                  <div class="form-group"> <label>Town :</label> <input type="text" id="group_town"
+                      formControlName="group_town" placeholder="Enter town"> </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <!--Submit and reset button-->
+            <div class="input-field
+          col-sm-12 col-lg-6"> <button class="btn btn-outline-secondary fa fa-check" type="submit"> Submit</button>
+              <button class="btn btn-outline-danger fa fa-undo" type="button" (click)="resetForm()"> Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

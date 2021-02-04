@@ -1,0 +1,177 @@
+<section class="branch">
+  <div class="row page-header">
+    <h1><i class="fa
+        fa-dashboard"></i> Dashboard</h1>
+  </div>
+  <div class="card-outer">
+    <div class="card-content">
+      <div class="row">
+      
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="card
+                    border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters
+                        align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-primary
+                            text-uppercase mb-1"> Branch Total: </div>
+                          <div class="h5 mb-0 font-weight-bold
+                            text-gray-800"> {{branches_count}} </div>
+                        </div>
+                        <div class="col-auto"> <i class="fa
+                            fa-bank fa-2x text-gray-300"> </i> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="card
+                    border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters
+                        align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-success
+                            text-uppercase mb-1"> Total Groups: </div>
+                          <div class="h5 mb-0 font-weight-bold
+                            text-gray-800"> {{groups_count}} </div>
+                        </div>
+                        <div class="col-auto"> <i class="fa
+                            fa-group fa-2x text-gray-300"> </i> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="card
+                    border-left-info shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters
+                        align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-info
+                            text-uppercase mb-1"> Active Accounts: </div>
+                          <div class="h5 mb-0 font-weight-bold
+                            text-gray-800"> {{members_count}} </div>
+                        </div>
+                        <div class="col-auto"> <i class="fa
+                            fa-address-book fa-2x text-gray-300"> </i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div class="col-xl-3 col-md-6 mb-4" *ngIf="auth.isAdmin()">
+                  <div class="card
+                      border-left-warning shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row
+                              no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs
+                                      font-weight-bold text-warning
+                                      text-uppercase mb-1"> Savings
+                            Total:
+                          </div>
+                          <div class="h5
+                                      mb-0 font-weight-bold
+                                      text-gray-800">
+                            KShs.{{_total_savings}}
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fa
+                                      fa-dollar fa-2x text-gray-300">
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="row">
+                <div class="col-xl-6 col-md-12 mb-4">
+                  <div class="card
+                    border-top-danger shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters
+                        align-items-center">
+                        <div class="col mr-2">
+                          <div class="text-xs font-weight-bold text-danger
+                            text-uppercase mb-1"> Messages: </div>
+                        </div>
+                        <div class="col-auto">
+                          <i class="fa fa-2x fa-comments-o text-gray-300" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                          <div class="table-responsive table-hover table-sm">
+                            <table class="table table-condensed cf">
+                              <thead class="table-header thead-dark">
+                                <tr>
+                                  <th>#</th>
+                                  <th>Branch name</th>
+                                  <th>Member name</th>
+                                  <th>Comment</th>
+                                  <th class="text-center">Action</th>
+
+                                </tr>
+                              </thead>
+
+                              <tr>
+                                <td class="font-italic text-center" colspan="5">
+                                  There is no content to display
+                                </td>
+                              </tr>
+
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <div class="col-xl-6 ">
+                  <h6>Groups per Branch</h6>
+                  <div style="display: block">
+
+                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                      [legend]="barChartLegend" [chartType]="barChartType" [colors]="colors">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+             
+
+            
+              <div hidden>
+                <div id="print-section" hidden>
+                  
+                  My name is steve
+                </div>
+                <button class="btn btn-info" printSectionId="print-section" ngxPrint><i class="fa fa-print"
+                    aria-hidden="true"></i> Print report</button>
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

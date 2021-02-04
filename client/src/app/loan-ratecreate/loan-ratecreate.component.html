@@ -1,0 +1,108 @@
+<div class="content-area">
+  <div class="row page-content-header">
+    <div class="col-sm-6">
+      <h1>
+        Update loan parameters
+      </h1>
+    </div>
+    <div class="col-sm-6 mr-auto">
+      <button class="btn btn-edit" type="button" (click)="edit()"><i class="fa
+          fa-pencil"></i>Edit</button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="col-sm-6 alert alert-danger" *ngIf="errorMsg">
+    {{errorMsg}}
+  </div>
+  <div class="col-sm-6 alert alert-success" *ngIf="successMsg">
+    {{successMsg}}
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <form [formGroup]="ratesForm" (ngSubmit)="updateRates(ratesUpdateForm)">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="section-description">
+              <p>Loan Status settings</p>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <label>Suspend loan penalization :<label class="red-text">*</label></label>
+              <select formControlName="loan_penalization_state" name="loan_penalization_state" id="loan_penalization_state" class="form-control">
+                <option [value]="_state.id" *ngFor="let _state of state">{{_state.name}}</option>
+              </select>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <label>Suspend Loan issues :<label class="red-text">*</label></label>
+             <select formControlName="loan_issuance_state"name="loan_issuance_state" id="loan_issuance_state" class="form-control">
+              <option [value]="_state.id" *ngFor="let _state of state">{{_state.name}}</option>
+             </select>
+            </div>
+
+            <div class="section-description">
+              <p>Loan rates <i>(Rates are in %)</i></p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Long term loan repay rate :<label class="red-text">*</label></label>
+              <input type="text" #normal_rate id="normal_rate" formControlName="normal_rate"
+                placeholder="Enter normal rate">
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Advance loan repay rate :<label class="red-text">*</label></label>
+              <input type="text" id="advance_rate" formControlName="advance_rate" placeholder="Enter advance rate">
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <label>Insurance/Appraisal rate :<label class="red-text">*</label></label>
+                <input type="text" id="insurance_rate" formControlName="insurance_rate" placeholder="Enter advance rate">
+              </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Default rate :<label class="red-text">*</label></label>
+              <input type="text" id="default_rate" formControlName="default_rate" placeholder="Enter default rate">
+            </div>
+            <div class="section-description">
+              <p>Loan limit</p>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label>Long Term loan<i>(Long term loans offered {{long_term}} * savings)</i>:<label
+                  class="red-text">*</label></label>
+              <input type="text" id="long_term" formControlName="long_term" placeholder="Enter loan limit">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label>Advance loan<i>(Long term loans offered {{adv_term}} * savings)</i>:<label
+                  class="red-text">*</label></label>
+              <input type="text" id="adv_term" formControlName="adv_term" placeholder="Enter advance loan limit">
+            </div>
+            <div class="section-description">
+              <p>Loan conditions</p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Set Months <i>(Minimum months for group to qualify for loans)</i>:<label
+                  class="red-text">*</label></label>
+              <input type="text" id="group_months" formControlName="group_months" placeholder="Enter number of months">
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Set membership <i>(Minimum membership per group for members to qualify for loans)</i> :<label
+                  class="red-text">*</label></label>
+              <input type="text" id="group_membership" formControlName="group_membership"
+                placeholder="Enter number of members">
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label>Set savings <i>(Minimum savings for member to qualify for loans)</i> :<label
+                  class="red-text">*</label></label>
+              <input type="text" id="minimum_savings" formControlName="minimum_savings" placeholder="Enter amount">
+            </div>
+          </div>
+        </div>
+        <hr>
+        <!--Submit and reset button-->
+        <div class="input-field col-sm-12">
+          <button class="btn btn-success fa fa-check right" type="button" (click)="save()"> Submit Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

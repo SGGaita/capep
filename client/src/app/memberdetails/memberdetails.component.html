@@ -1,0 +1,579 @@
+<div class="content-area">
+  <div class="row page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <a type="button" class="btn btn-info fa fa-arrow-left" (click)="grouplist()">
+              Group Members list</a>
+            <a type="button" class="btn btn-secondary" (click)="refresh()"><i class="fa fa-undo"></i> Refresh</a>
+            <button type="button" class="btn btn-warning" (click)="previous()" disabled><i
+                class="fa fa-angle-double-left" aria-hidden="true"></i>
+              Previous</button>
+            <button type="button" class="btn btn-warning" (click)="next()" disabled>
+              Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+            <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item fa fa-pencil" (click)="edit()"> Edit
+                Member</a>
+              <a class="dropdown-item fa fa-plus" (click)="gosavings()"> Add
+                Savings</a>
+              <a class="dropdown-item fa fa-plus" (click)="goloan()"> Loan
+                Application</a>
+              <a class="dropdown-item fa fa-plus" (click)="godividend()"> Dividend Allocation</a>
+              <a class="dropdown-item fa fa-trash" (click)="delete()">
+                Delete Records</a>
+              <a class="dropdown-item fa fa-print"> Member Reports</a>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row page-content-header">
+          <h1>Member Details</h1>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="card-area-members shadow">
+                <!--Header part-->
+                <div class="row thead-dark">
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="col-sm-12 dashbord-tbl-description">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h1>Member's Information</h1>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Group Name: <i>{{_group_name}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Name: <i>{{_member_name}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Id Number: <i> {{_member_id_no}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Membership Number: <i>{{_group_code}}{{_membership_no
+                              | number:'3.0'}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Registration Date: <i> {{_dateJoined | date: 'MMMM d,
+                              yyyy'}}</i></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--Next of kin-->
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="col-sm-12 dashbord-tbl-description">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <h1>Contact Information</h1>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Phone Number: <i> {{_phone_number}}</i></p>
+                        </div>
+                        <div class=" col-sm-12">
+                          <p>Location: <i>{{_location}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Town: <i> {{_town}}</i></p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p>Member Occupation <i>{{_member_occupation}}</i></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="col-sm-12 dashbord-tbl-description">
+                      <div class="row">
+                        <div class="col-sm-12">
+                        </div>
+                        <div class="col-sm-12">
+                          <div id="passport" class="col-sm-12">
+                            <img src="../../assets/img/members/{{member_id_no}}.jpg">
+                          </div>
+                          <div col-sm-12>
+                            <button class="btn btn-dark fa fa-upload" (click)="upload()"> Upload/Change Image </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#id-card">View ID and
+                    Signature</button>
+                  <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#next-kin">Next
+                    of
+                    Kin </button>
+                </div>
+                <div class="row dashbord-tbl-description">
+                  <div id="next-kin" class="collapse">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h1>Next of Kin Information</h1>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>Name: <i> {{next_kin_name}}</i></p>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>Relation: <i>{{next_relation}}</i></p>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>ID number: <i>{{next_id_number}}</i></p>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>Phone number: <i>{{next_phone_number}}</i></p>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>Location: <i>{{next_location}}</i></p>
+                      </div>
+                      <div class="col-sm-12">
+                        <p>Town: <i>{{next_town}}</i></p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="id-card" class="collapse">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="col-sm-12">
+                          <img src="../../assets/img/members/id/{{member_id_no}}.jpg">
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="col-sm-12">
+                          <img src="../../assets/img/members/{{signature_image}.jpg">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--Header part end-->
+              </div>
+            </div>
+            
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card-area-members shadow">
+              <!--Header part-->
+              <div class="row thead-dark">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                  <div class="row">
+                    <div class="col-sm-12 dashbord-tbl-description">
+                      <h1>Member's Financial History</h1>
+                    </div>
+                  </div>
+                  <div class="accordion" id="accordionExample">
+                    <div class="card-accordion">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Savings Records
+                          </button>
+
+                          <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseBF"
+                            aria-expanded="true" aria-controls="collapseOne" *ngIf="auth.isAdmin()">
+                            Savings BF
+                          </button>
+                        </h5>
+
+                      </div>
+
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+
+                          <!-- <div class="row">
+                            <div class="col-sm-12">
+                              <p><Label>Current Total shares:</Label><i>KSh.</i><i class="red-text"> {{_total_shares}}</i></p>
+                            </div>
+                          </div>-->
+                          <!--Search field-->
+                          <div class=" col-sm-12 search-field">
+                          <!--  <form id="filter">
+                              <div class="row">
+                                <div class="col-sm-12"><label>Filter records by Date:</label>
+                                  <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <label>Filter by date:</label>
+                                    <input type="date" [min]="minDate" [max]="maxDate" [(ngModel)]="searchDate"
+                                      name="searchDate">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>-->
+                        </div>
+                        <!--End Search field-->
+                        <!--Start table-->
+                        <div class="table-responsive table-hover table-sm">
+                          <table class="table table-condensed cf ">
+                            <thead class="table-header thead-dark">
+                              <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Total shares</th>
+                                <th>Shares B/F</th>
+                                <th>Monthly Savings</th>
+                                <th>Total Payment</th>
+                                <th class="text-center">Action</th>
+
+                              </tr>
+                            </thead>
+                            <tr *ngIf="savings?.length == 0">
+                              <td class="font-italic text-center alert alert-info" colspan="7">
+                                There is no content to display at the moment
+                              </td>
+                            </tr>
+                            <tr
+                              *ngFor="let saving of savings |orderBy:'-savings_date'|filterByBname:{savings_date: searchDate}| paginate: { itemsPerPage: 10, currentPage: p };let i = index"
+                              class="table-list">
+                              <td>{{i+1}}</td>
+                              <td>{{saving.savings_date | date: "MMM dd,yyyy"}}</td>
+                              <td>{{saving._savings_total}}</td>
+                              <td>{{saving._savings_bf}}</td>
+                              <td>{{saving.savings_amount}}</td>
+                              <td>{{saving.total_payments}}</td>
+                              <td class="text-center">
+                                <div class="dropdown">
+                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select Action
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" (click)="onSelectSaving(saving)">Edit</a>
+                                    
+                                    <a class="dropdown-item" mwlConfirmationPopover
+                                    [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                                    (confirm)="removelistElement(saving)" (cancel)="cancelClicked=true"
+                                    *ngIf="auth.isAdmin()">Delete</a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col s12 text-center paginate">
+                            <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                          </div>
+                        </div>
+                        <!--End table-->
+                      </div>
+                    </div>
+
+                    <div id="collapseBF" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                      <div class="card-body">
+
+                        <!-- <div class="row">
+                            <div class="col-sm-12">
+                              <p><Label>Current Total shares:</Label><i>KSh.</i><i class="red-text"> {{_total_shares}}</i></p>
+                            </div>
+                          </div>-->
+                        <!--Search field-->
+                        <div class="col-sm-12 search-field">
+                          <!--  <form id="filter">
+                              <div class="row">
+                                <div class="col-sm-12"><label>Filter records by Date:</label>
+                                  <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <label>Filter by date:</label>
+                                    <input type="date" [min]="minDate" [max]="maxDate" [(ngModel)]="searchDate"
+                                      name="searchDate">
+                                  </div>
+                                </div>
+                              </div>
+                            </form>-->
+                        </div>
+                        <!--End Search field-->
+                        <!--Start table-->
+                        <div class="table-responsive table-hover table-sm">
+                          <table class="table table-condensed cf ">
+                            <thead class="table-header thead-dark">
+                              <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Shares B/F</th>
+                                <th class="text-center">Action</th>
+                              </tr>
+                            </thead>
+                            <tr *ngIf="savings_bf?.length == 0">
+                              <td class="font-italic text-center alert alert-info" colspan="8">
+                                There is no content to display at the moment
+                              </td>
+                            </tr>
+                            <tr *ngFor="let _bf of savings_bf ;let i = index" class="table-list">
+                              <td>{{i+1}}</td>
+                              <td>{{_bf.savings_date | date: "MMM dd,yyyy"}}</td>
+                              <td>{{_bf._savings_bf}}</td>
+                              <td class="text-center">
+                                <div class="dropdown">
+                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select Action
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" (click)="onSelectSavingBf(_bf)">View</a>
+                                    
+                                    <a class="dropdown-item"  mwlConfirmationPopover
+                                    [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                                    (confirm)="removelistElementBF(_bf)" (cancel)="cancelClicked=true"
+                                    *ngIf="auth.isAdmin()">Delete</a>
+                                  </div>
+                                </div>
+                              </td>
+
+                        </tr>
+                          </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col s12 text-center paginate">
+                            <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                          </div>
+                        </div>
+                        <!--End table-->
+                      </div>
+                    </div>
+                  </div>
+                  <!--Begin loans history-->
+                  <div class="card-accordion">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Loan Records
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                      <div class="card-body">
+
+                        <div id="loanGroup">
+                          <!--Begin Buttons-->
+                          <div class="col-sm-12">
+                            <!--<button type="button" class="btn btn-custom" data-toggle="collapse"
+                                data-target="#collapseActive">Active loans</button>-->
+                            <button type="button" class="btn btn-outline-info collapsed" data-toggle="collapse"
+                              data-target="#collapseHistory">Application History</button>
+                          </div>
+                          <!--End Buttons-->
+                          <!--Collapse bodies-->
+                          <div id="collapseActive" class="collapse" data-parent="#loanGroup">
+                            <div class="card-body dashbord-tbl-description">
+                              <h1>Active loans</h1>
+                              <!--Start table-->
+                              <div class="table-responsive table-hover table-sm">
+                                <table class="table table-condensed cf ">
+                                  <thead class="table-header thead-dark">
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Date applied</th>
+                                      <th>Type</th>
+                                      <th>Loan amount</th>
+                                      <th>Amount repayed</th>
+                                      <th>Balance</th>
+                                      <th class="text-center">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tr *ngIf="loan_app?.length == 0">
+                                    <td class="font-italic text-center alert alert-info" colspan="7">
+                                      There is no content to display at the moment
+                                    </td>
+                                  </tr>
+                                  <tr class="table-list" hidden
+                                    *ngFor="let aloans of loan_app | orderBy:'-start_date' | paginate: { itemsPerPage: 10, currentPage: p }; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{aloans.start_date | date: "MMM dd,yyyy"}}</td>
+                                    <td>
+                                      <p *ngIf="aloans.loan_type_id_fk == 1">Longterm</p>
+                                      <p *ngIf="aloans.loan_type_id_fk == 2">Advance</p>
+                                    </td>
+                                    <td>KShs.{{aloans.loan_amount}}</td>
+                                    <td>{{_total_repay}}</td>
+                                    <td></td>
+                                    <td class="text-center">
+                                      <button class="btn btn-custom">Details</button>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                              <br>
+                              <div class="row">
+                                <div class="col s12 text-center paginate">
+                                  <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                                </div>
+                              </div>
+                              <!--End table-->
+                            </div>
+                          </div>
+
+                          <!-----------Break components------------>
+                          <div id="collapseHistory" class="collapse" data-parent="#loanGroup">
+                            <div class="card-body dashbord-tbl-description">
+                              <h1>Application History</h1>
+                              <!--Start table-->
+                              <div class="table-responsive table-hover table-sm">
+                                <table class="table table-condensed cf ">
+                                  <thead class="table-header thead-dark">
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Date applied</th>
+                                      <th>Type</th>
+                                      <th>Amount applied</th>
+                                      <th>Application status</th>
+                                      <th>Loan status</th>
+                                      <th class="text-center">Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tr *ngIf="loan_app?.length == 0">
+                                    <td class="font-italic text-center alert alert-info" colspan="7">
+                                      There is no content to display at the moment
+                                    </td>
+                                  </tr>
+                                  <tr class="table-list"
+                                    *ngFor="let loan of loan_app | orderBy:'-start_date' | paginate: { itemsPerPage: 10, currentPage: p } ; let i=index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{loan.start_date | date: "MMM dd,yyyy"}}</td>
+                                    <td>
+                                      <p *ngIf="loan.loan_type_id_fk == 1">Longterm</p>
+                                      <p *ngIf="loan.loan_type_id_fk == 2">Advance</p>
+                                    </td>
+                                    <td>KShs.{{loan.loan_amount}}</td>
+                                    <td class="text-center">
+                                      <p class="alert alert-success" *ngIf="loan.loan_status == 1">Approved
+                                      </p>
+                                      <p class="alert alert-danger" *ngIf="loan.loan_status == 2">Declined
+                                      </p>
+                                      <p class="alert alert-warning" *ngIf="loan.loan_status == 0">Pending
+                                      </p>
+                                    </td>
+                                    <td></td>
+                                    <td class="text-center">
+                                      <div class="dropdown">
+                                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Select Action
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                          <a class="dropdown-item" (click)="onSelectApp(loan)"> View Details</a>
+                                          <a class="dropdown-item" > Edit</a>
+                                          <a class="dropdown-item" > Loan Suspension</a>
+                                          <a class="dropdown-item" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                                          [popoverMessage]="popoverMessage" placement="left"
+                                          (confirm)="removelistElementLoan(loan)" (cancel)="cancelClicked=
+                                          true" *ngIf="auth.isAdmin()">Delete</a>
+                                        </div>
+                                      </div>
+                                    </td>
+                                
+                                  </tr>
+                                </table>
+                              </div>
+                              <br>
+                              <div class="row">
+                                <div class="col s12 text-center paginate">
+                                  <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                                </div>
+                              </div>
+                              <!--End table-->
+                            </div>
+                          </div>
+                          <!--end collapse bodies-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End loans history-->
+                  <!--Begin Dividend-->
+                  <div class="card-accordion">
+                    <div class="card-header" id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Dividend Records
+                        </button>
+                      </h5>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingTwo"
+                      data-parent="#accordionExample">
+                      <div class="card-body">
+
+                        <!--Start table-->
+                        <div class="table-responsive table-hover table-sm">
+                          <table class="table table-condensed cf ">
+                            <thead class="table-header thead-dark">
+                              <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Rate</th>
+                                <th>Purpose</th>
+                                <th class="text-center">Action</th>
+                              </tr>
+                            </thead>
+                            <tr *ngIf="dividends?.length == 0">
+                              <td class="font-italic text-center alert alert-info" colspan="6">
+                                There is no content to display at the moment
+                              </td>
+                            </tr>
+                            <tr
+                              *ngFor="let dividend of dividends |orderBy:'-savings_date'|filterByBname:{savings_date: searchDate}| paginate: { itemsPerPage: 10, currentPage: p };let i = index"
+                              class="table-list">
+                              <td>{{i+1}}</td>
+                              <td>{{dividend.createdAt | date: "MMM dd,yyyy"}}</td>
+                              <td>{{dividend.dividend_amount}}</td>
+                              <td>{{dividend.dividend_rate}}</td>
+                              <td>{{dividend.purpose_1}},{{dividend.purpose_2}},{{dividend.purpose_3}}</td>
+
+
+                              <td class="text-center">
+                                <div class="dropdown">
+                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Select Action
+                                  </button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" (click)="onSelectSaving(dividend)"> View Details</a>
+                                    <a class="dropdown-item" (click)="onSelectSaving(dividend)"> Edit</a>
+                                    <a class="dropdown-item" mwlConfirmationPopover
+                                    [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="left"
+                                    (confirm)="removelistElement(dividend)" (cancel)="cancelClicked=true"
+                                    *ngIf="auth.isAdmin()">Delete</a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <div class="col s12 text-center paginate">
+                            <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                          </div>
+                        </div>
+                        <!--End table-->
+
+                      </div>
+                    </div>
+                  </div>
+                  <!--End Dividend-->
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

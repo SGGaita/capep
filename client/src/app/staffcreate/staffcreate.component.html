@@ -1,0 +1,113 @@
+<div class="content-area">
+  <mat-divider></mat-divider>
+  <div class="row page-content-header">
+    <h1>New Staff</h1>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="col-sm-12 col-md-12 col-lg-6 alert alert-danger" *ngIf="errorMsg">
+    {{errorMsg}}
+  </div>
+  <div class="col-sm-12 col-md-12 col-lg-6 alert alert-success" *ngIf="successMsg">
+    {{successMsg}}
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <form [formGroup]="staffForm">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="row">
+              <div class="section-description">
+                <p>Enter staff information</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Staff Name:<label class="red-text">*</label> </label>
+                  <input type="text" id="staff_name" formControlName="staff_name" placeholder="Enter full staff name">
+                </div>
+                <div *ngIf="submitted && f.staff_name.errors">
+                  <div *ngIf="f.staff_name.errors.required" class="alert alert-danger">Staff name is required</div>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label>Staff id:<label class="red-text">*</label></label>
+                  <input class="form-control" type="text" id="staff_id_number" formControlName="staff_id_number"
+                    placeholder="Enter staff id number">
+                </div>
+                <div *ngIf="submitted && f.staff_id_number.errors">
+                  <div *ngIf="f.staff_id_number.errors.required" class="alert alert-danger">Staff id number is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12"> <label>Select Gender:<label class="red-text">*</label></label>
+                <select class="form-control" formControlName="staff_gender" id="staff_gender"
+                  placeholder="Select gender">
+                  <option selected disabled>Select gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select> </div>
+              <div class="col-sm-12">
+                <label>Staff email :</label>
+                <input type="text" id="staff_email" formControlName="staff_email" placeholder="Enter staff email">
+              </div>
+              <div class="col-sm-12">
+                <label>Staff phone number :</label>
+                <input type="text" id="staff_phone_number" formControlName="staff_phone_number"
+                  placeholder="Enter phone number">
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="row">
+              <div class="section-description">
+                <p>Upload
+                  Passport image and ID card</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-md-6">
+                <div class="form-group
+                  upload-btn"> <label class="image-upload-container btn
+                    btn-danger fa fa-3x fa-upload">Upload Photo <input #imageStaff type="file" accept="image/*"
+                      (change)="processImage(imageStaff)" formControlName="staff_image" id="staff_image"
+                      name="staff_image">
+                  </label>
+                  <!--image preview-->
+                  <div *ngIf="selectedStaff" class="img-preview-container">
+                    <div class="img-preview" [ngStyle]="{'background-image':
+                      'url('+ selectedStaff.src +')'}">
+                      <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                         <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12
+                col-md-6">
+                <div class="form-group upload-btn"> <label class="image-upload-container
+                    btn btn-danger fa fa-3x fa-upload"> Upload Id card <input #imageID type="file" accept="image/*"
+                      (change)="processIdCard(imageID)" formControlName="staff_id_image" id="staff_id_image"
+                      name="staff_id_image">
+                  </label>
+                  <!--image preview-->
+                  <div *ngIf="selectedID" class="img-preview-container">
+                    <div class="img-preview" [ngStyle]="{'background-image':
+                      'url('+ selectedID.src +')'}">
+                      <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                       <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <!--Submit and reset button-->
+        <div class="input-field col-sm-12">
+          <button class="btn btn-outline-secondary fa fa-check" type="button" (click)="save()"> Submit</button>
+          <button class="btn btn-outline-danger fa fa-undo mr-auto" type="button" (click)="reset()"> Reset</button> </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,202 @@
+<div class="content-area">
+    <div class="row page-header">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+              <a class="btn btn-info " (click)="back()"> <i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+              <a type="button" class="btn btn-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+            <button class="btn btn-warning  right" (click)="previous()"><i class="fa fa-angle-double-left"
+                aria-hidden="true"></i> Previous</button>
+            <button class="btn btn-warning right" (click)="next()">Next <i class="fa fa-angle-double-right"
+                aria-hidden="true"></i></button>  
+  
+            <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">             
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 page-content-header">
+        <h1>Loan Update</h1>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="card-area-members shadow">
+            <!--Header part-->
+            <div class="row thead-dark">
+              <!--Begin Member-->
+              <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="col-sm-12 dashbord-tbl-description">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h1>Member's Information</h1>
+                    </div>
+                    <div class="col-sm-12 info-area">
+                      <p>Group Name: <i>{{_group_name}}</i></p>
+                    </div>
+                    <div class="col-sm-12 info-area">
+                      <p>Name: <i> {{_member_name}}</i></p>
+                    </div>
+                    <div class="col-sm-12 info-area">
+                      <p>Id Number: <i>{{_member_id_no}}</i></p>
+                    </div>
+                    <div class="col-sm-12 info-area">
+                      <p>Membership Number: <i>{{_group_code}}{{_membership_no |
+                          number:'3.0'}}</i></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--End member Information-->
+              <!--Finance-->
+              <div class="col-sm-12 col-md-12 col-lg-6">
+                <div class="col-sm-12 dashbord-tbl-description">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h1>Financial Information</h1>
+                    </div>
+                    <div class="col-sm-12 info-area fin">
+                      <p>Savings/Shares B/F:KShs.<i>{{_total_savings}}</i></p>
+                    </div>
+                    <div class="col-sm-12 info-area fin" *ngIf="!_pendingMsg">
+                      <p>Loan amount: KShs<i> {{_loan_amount}}</i></p>
+                    </div>
+                    
+                    <div class="col-sm-12 info-area fin" *ngIf="!_pendingAdvMsg">
+                      <p>Application date: <i> {{_start_date  | date: 'MMMM d,
+                        yyyy'}}</i></p>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+              <!--End Finance Information-->
+            </div>
+            <!--Header part end-->
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12 alert alert-danger" *ngIf="errorMsg">
+            CAUTION: {{errorMsg}}!
+          </div>
+          <div class="col-sm-12 alert alert-success" *ngIf="successMsg">
+            FEEDBACK: {{successMsg}}
+          </div>          
+        </div>
+      </div>
+      <hr>  
+     
+      <div class="row">
+        <div class="col-sm-12">
+          <form class="form" [formGroup]="loanUpdateForm" (ngSubmit)="save()">
+            <div class="row">
+              <!--Hidden content-->  
+              <input type="text" formControlName="loan_id" id="loan_id" name="loan_id" hidden>
+  
+              <!--Member Id end-->
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <p>Fill the fields appropriately<label class="red-text">*</label></p>
+                  </div>
+                 
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Loan Type<label class="red-text">*</label></label>
+                        <select class="form-control" required id="loan_type_id" formControlName="loan_type_id"
+                          >
+                          <option value='0' disabled selected>--- Select Type ---</option>
+                          <option *ngFor="let loanType of loan_types ; let i=
+                            index" [value]="loanType.loan_type_id" [selected]="i
+                            == 0"> {{i+1}}.{{loanType.loan_type | uppercase}} </option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Loan amount<label class="red-text">*</label></label>
+                        <input type="text" #loan_amount formControlName="loan_amount" id="loan_amount" name="loan_amount"
+                          (keyup)="onAmountChange()">
+  
+                        <div class="alert alert-danger" *ngIf="negError">{{negError}}</div>
+                        <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                     <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Start date<label class="red-text">*</label></label>
+                        <input class="form-control" type="date" #start_date formControlName="start_date" id="start_date"
+                          [min]="minDate" [max]="maxDate" (focus)="onFocusDate1($event.target.value)"
+                          (change)="onChangeDate1($event.target.value)">
+                        <div class="alert alert-danger" *ngIf="negDateErr">{{negDateErr}}</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="form-group">
+                        <label for="">End date<label class="red-text">*</label></label>
+                        <input class="form-control" type="date" formControlName="end_date" id="end_date" [min]="maxDate"
+                          (change)="onChangeDate($event.target.value)" (focus)="onFocusDate2($event.target.value)">
+                        <div class="alert alert-danger" *ngIf="repayperiodMsg">{{repayperiodMsg}}</div>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Loan fee<label class="red-text">*</label></label>
+                        <input type="text" formControlName="loan_fee" id="loan_fee" name="loan_fee">
+                        <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                     <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                      </div>
+                    </div>
+  
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Insurance/Appraisal({{ _insurance_rate}}%)<label class="red-text">*</label></label>
+                        <input type="text" formControlName="insurance_amount" id="insurance_amount"
+                          name="loan_insurance_rate">
+                        <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                     <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                      </div>
+                    </div>
+  
+  
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                      <div class="form-group">
+                        <label>Guarantors</label>
+                        <select class="form-control" multiple id="guarantorsName" formControlName="guarantorsName">
+                          <option *ngFor="let guarantor of guarantors; let
+                            i=index" [value]="guarantor.member_name">
+                            {{guarantor.member_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                      <div class="form-group">
+                        <label for="">Loan purpose</label>
+                        <select class="form-control" multiple formControlName="loan_purpose" id="loan_purpose">
+                          <option *ngFor="let purpose of loan_purposelist; let i=
+                            index" [value]="purpose.p_name">
+                            {{purpose.p_name}}
+                          </option>
+                        </select>
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Submit and reset button-->
+            <div class="row">
+              <button class="btn btn-success left fa fa-check" type="submit"> Submit application</button>              
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

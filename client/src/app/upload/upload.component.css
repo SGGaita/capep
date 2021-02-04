@@ -1,0 +1,4 @@
+button.btn[disabled]{
+    background: gray;
+    cursor: no-drop;
+}

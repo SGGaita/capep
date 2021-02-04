@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!--Content here-->
+    <div class="col-sm-12 search-field">
+      <form id="filter">
+        <div class="row">
+        </div>
+      </form>
+    </div>
+    <div class="table-responsive-md table-hover table-sm">
+      <table class="table table-condensed cf">
+        <thead class="table-header thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Full name</th>
+            <th>ID number</th>
+            <th>email</th>
+            <th>Phone number</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <!--tr *ngIf=  "staffs?.length == 0  ">   
+                         <td class=  "font-italic text-center  " colspan=  "5  ">   
+                                        There is no content to display              </td>            </tr>-->
+        <tr *ngFor="let staff of staffs | paginate: { itemsPerPage: 10,
+          currentPage: p }; let i=index" class="table-list">
+          <td>{{i+1}}</td>
+          <td>{{staff.staff_name}}</td>
+          <td>{{staff.staff_id_number}}</td>
+          <td>{{staff.staff_email}}</td>
+          <td>{{staff.staff_phone_number}}</td>
+          <td class="text-center">
+            <button class="btn btn-outline-secondary fa fa-2x fa-pencil"
+              (click)="onSelectEdit(staff)">
+              <span class="btn-space">Edit</span>
+            </button>
+            <button class="btn btn-outline-danger fa fa-2x fa-trash"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage"
+              placement="left" (confirm)="removelistElement(staff)"
+              (cancel)="cancelClicked=
+              true"><span class="btn-space">Delete</span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col s12 text-center
+        paginate">
+        <pagination-controls (pageChange)="p= $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

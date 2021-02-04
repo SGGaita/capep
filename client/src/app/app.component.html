@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <app-topnav (toggleSideBarForMe)="sideBarToggler()" *ngIf="auth.isLoggedIn()"></app-topnav>
+
+  <mat-drawer-container>
+    <mat-drawer mode="side" [opened]="sideBarOpen" *ngIf="auth.isLoggedIn()"><app-sidenav></app-sidenav></mat-drawer>
+    <mat-drawer-content>
+      <router-outlet ></router-outlet>
+    </mat-drawer-content>
+
+  </mat-drawer-container>
+  <app-footer></app-footer>
+</div>

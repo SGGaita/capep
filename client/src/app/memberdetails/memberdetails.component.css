@@ -1,0 +1,37 @@
+.bf{
+    margin-top: 15px;
+    font-size: 15px;
+    color: #4b4b5f;
+}
+
+.bf i{
+    color: rgb(78, 3, 3)
+}
+
+td{
+    font-weight: 600
+}
+
+.btn{
+    color:black
+}
+
+.btn-dark{
+    color:#fff
+}
+
+.btn-dark:hover{
+    color:#fff;
+    background:#343a40bd;
+    transition:background 1s ease-in;
+}
+
+.btn{
+    padding-left:15px;
+    padding-right:20px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    margin-left: 1px;
+}

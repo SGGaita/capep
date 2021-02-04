@@ -1,0 +1,177 @@
+.btn.btn-secondary{
+    color: #000
+}
+
+button.btn[disabled] {
+    cursor: no-drop;
+    color:rgb(14, 13, 13)
+}
+
+button.btn[disabled]:hover {
+    background: rgb(8, 8, 8);
+    cursor: no-drop;
+    color:white
+}
+.loginForm {
+    
+    margin: 80px auto;
+    border: #00000052 solid 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.login-form{
+    padding: auto 35px;
+}
+
+ 
+
+.login-header h1{
+    font-size: 23px;
+    line-height: 30px;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.login-header p {
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.alert img{
+    height:20px;
+    width:20px;
+    margin-left: 20px
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 575.98px){
+    .card {
+    position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 90%;
+    border-radius: 2px;
+}
+
+.btn {
+    margin: 10px auto;
+    font-size: 15px;
+    /*background-color: #26a69a;*/
+}
+
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 446px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 80%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+} 
+
+@media only screen and (min-width: 576px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 75%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+} 
+
+@media only screen and (min-width: 615px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 60%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 100%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 90%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .card {
+        position: relative;
+    margin: .3rem auto 1rem auto;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    width: 60%;
+    border-radius: 2px;
+    }
+    
+    .btn {
+            margin: 10px auto;
+            font-size: 15px;
+            /*background-color: #26a69a;*/
+        }
+}

@@ -1,0 +1,15 @@
+<section class="branch">
+  <div class="row page-header">
+    <h1>Reports Manager</h1>
+  </div>
+  <div class="content-area">
+    <div class="row page-header">
+      <div class="col-sm-12">
+        <button class="btn btn-outline-secondary" data-toggle="collapse" data-target="#branch" (click)="goBranch()">Branch Reports</button>
+        <button class="btn btn-outline-secondary" data-toggle="collapse" data-target="#group" (click)="goGroup()">Group Reports</button>
+        <button class="btn btn-outline-secondary" data-toggle="collapse" data-target="#member" (click)="goMember()">Members reports</button>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>

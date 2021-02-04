@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <a type="button" class="btn btn-custom fa fa-arrow-left" (click)="back()"> Back</a>
+          <a type="button" class="btn btn-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item fa fa-minus" (click)="newLoans()"> New Loans</a>
+            <a class="dropdown-item fa fa-minus" (click)="acceptedLoans()"> Accepted loans</a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active show">
+          <div class="col-sm-12 page-content-header">
+            <h1>Declined Loans Management: {{group_name}} - {{branch_name}} Branch</h1>
+          </div>
+          <hr>
+          <div class="col-sm-12 search-field">
+            <form id="filter">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>Filter by group name:</label>
+                  <input type="text" placeholder="Search">
+                </div>
+                <div class="col-sm-4">
+                  <label>Filter by member name:</label>
+                  <input type="text" placeholder="Search">
+                </div>
+                <div class="col-sm-4">
+                  <label>Filter by member number:</label>
+                  <input type="text" placeholder="Search">
+                </div>
+              </div>
+            </form>
+          </div>
+          <!--Begin table-->
+          <div class="table table-hover table-sm">
+            <table class="responsive-table highlight">
+              <thead class="table-header">
+                <tr>
+                  <th>#</th>
+                  <th>Group Name</th>
+                  <th>Member number</th>
+                  <th>Member Name</th>
+                  <th>Loan type</th>
+                  <th>Amount Applied</th>
+                  <th>Date applied</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tr *ngIf="loans?.length == 0">
+                <td class="font-italic text-center alert alert-info" colspan="9">
+                  No records found </td>
+              </tr>
+              <tr *ngFor="let loan of loans | paginate: { itemsPerPage:
+                10,currentPage: p }; let i=index" class="table-list">
+                <td>{{i+1}}</td>
+                <td>{{loan.group_name}}</td>
+                <td>{{loan.group_code}}{{loan.membership_no | number: '3.0'}}</td>
+                <td>{{loan.member_name}}</td>
+                <td>{{loan.type_name}}</td>
+                <td>{{_currency_sym}}{{loan.loan_amount}}</td>
+                <td>{{loan.start_date | date: 'MMMM d, yy' }}</td>
+                <td class="text-center">                  
+                  <button class="btn btn-edit fa fa-2x fa-eye" (click)="onSelectLoans(loan)">
+                    <span class="btn-space">Review</span>
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col s12 text-center paginate">
+              <pagination-controls (pageChange)="p= $event"></pagination-controls>
+            </div>
+          </div>
+          <!--End table-->
+        </div>       
+      </div>
+      <!--Tabs End-->
+      <!--Content here-->
+    </div>
+  </div>
+  

@@ -1,0 +1,109 @@
+<div class="_menu bg-dark">
+  <div class="_menu_items">
+    <div class="subHeading">
+      <h2 matSubHeader class="SubMenu">DASHBOARD</h2>
+    </div>
+    <div class="_menuLinks">
+      <ul class="list-unstyled components">
+        <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+      </ul>
+    </div>
+
+    <div class="subHeading">
+      <h2 matSubHeader class="SubMenu">MEMBER ACCOUNTS & GROUPS MANAGER</h2>
+    </div>
+    <div class="_menuLinks">
+      <ul class="list-unstyled components">
+        <li><a routerLink="/group/create" routerLinkActive="active">New Group</a></li>
+        <li><a routerLink="/group/list" routerLinkActive="active">Group list</a></li>
+        <li><a routerLink="/group/members/create" routerLinkActive="active">New Member</a></li>
+        <li><a routerLink="/group/mgroups" routerLinkActive="active">Member Accounts</a></li>
+        <li><a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">Account
+            Transactions</a>
+          <ul class="collapse list-unstyled" id="transactionSubmenu">
+
+            <li>
+              <a routerLink="/group/sgroups"  routerLinkActive="active"> <i class="fas fa-university"></i> Savings</a>
+            </li>
+            <li>
+              <a routerLink="/group/lgroups"><i class="fas fa-balance-scale" aria-hidden="true"></i> Loan application</a>
+            </li>
+            <li>
+              <a routerLink="/group/dgroups"> <i class="fas fa-hands"></i> Dividend allocation</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="subHeading">
+      <h2 matSubHeader class="SubMenu">ADMINISTRATOR</h2>
+    </div>
+    <div class="_menuLinks">
+      <ul class="list-unstyled components">
+        <li> <a href="#loansSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">Loans
+        </a>
+        <div class="level3">
+          <ul class="collapse list-unstyled" id="loansSubmenu">
+            <li>
+              <a routerLink="/admin/loans" routerLinkActive="active">Loans manager</a>
+            </li>
+            <li>
+              <a routerLink="/admin/loan-parameters/loan-rates" routerLinkActive="active">Loan Parameters</a> </li>
+            <li>
+              <a routerLink="/admin/loan-parameters/repay-terms" routerLinkActive="active">Repay period manager</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+        
+      <li>
+        <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">Report</a>
+        <div class="level3">
+          <ul class="collapse list-unstyled" id="reportSubmenu">
+            <li>
+              <a routerLink="/admin/reports/branch" routerLinkActive="active">Branch
+                Report</a>
+            </li>
+            <li>
+              <a routerLink="/admin/reports/group" routerLinkActive="active">Group Reports</a>
+            </li>
+            <li>
+              <a routerLink="/admin/reports/member" routerLinkActive="active">Members Reports</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a routerLink="/admin/accounts" routerLinkActive="active">User
+          Manager</a>
+      </li>
+      <li>
+        <a routerLink="/admin/staff" routerLinkActive="active">Staff
+          Manager</a>
+      </li>
+      <li>
+        <a href="#systemSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed">System
+          Manager</a>
+        <div class="level3">
+          <ul class="collapse list-unstyled" id="systemSubmenu">
+            <li> <a routerLink="/admin/system-manager/branch" routerLinkActive="active">Branch manager</a>
+            </li>
+            <li>
+              <a routerLink="/admin/system-manager/group-manager" routerLinkActive="active">Group manager</a>
+            </li>
+            <li>
+              <a routerLink="/admin/system-manager/membership-manager" routerLinkActive="active">Membership
+                manager</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a routerLink="/admin/staff" routerLinkActive="active">Resource Center</a>
+      </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

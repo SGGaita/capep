@@ -1,0 +1,21 @@
+<section class="branch">
+  <div class="row page-header">
+    <h1>Loan Parameters Manager</h1>
+  </div>
+  <div class="row">
+    <div class="col 12">
+      <div class="card-outer">
+        <div class="card-content">
+          <div class="row ">
+            <div class="card-top">
+              <button class="btn btn-custom fa fa-2x fa-plus-circle" (click)="createNewRparameter()"> New repay parameters</button>
+              <button class="btn btn-custom fa fa-2x fa-list" (click)="showParameterslist()"> Manage parameters</button>
+            </div>
+          </div>
+          <hr>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

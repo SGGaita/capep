@@ -1,0 +1,88 @@
+<ngx-spinner bdOpacity=0.2 bdColor="rgba(5,48,80,0.58)" size="default" color="#fff" type="ball-running-dots"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<div class="content-area">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-12">
+        <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item fa fa-minus" (click)="goMembers()"> Members Groups list</a>
+          <a class="dropdown-item fa fa-minus" (click)="goSavings()"> Savings Groups list</a>
+          <a class="dropdown-item fa fa-minus" (click)="goLoans()"> Loan Groups list</a>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="row page-content-header">
+        <h1>Dividend: Groups list</h1>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-sm-12 search-field">
+        <form id="filter">
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Filter by branch:</label>
+              <input type="text" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+            </div>
+            <div class="col-sm-4">
+              <label>Filter by group name:</label>
+              <input type="text" placeholder="Search" [(ngModel)]="searchGname" name="searchGname">
+            </div>
+            <div class="col-sm-4">
+              <label>Filter by group code:</label>
+              <input type="text" placeholder="Search" [(ngModel)]="searchGcode" name="searchGcode">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="table-responsive-md table-hover table-sm">
+        <table class="table table-condensed cf">
+          <thead class="table-header thead-dark">
+            <tr>
+              <th>Group Number</th>
+              <th>Branch
+                name</th>
+              <th>Group Name</th>
+              <th>Location</th>
+              <th>Town</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tr *ngIf="groups?.length == 0">
+            <td class="font-italic text-center" colspan="6"> There is no content to
+              display </td>
+
+          <tr *ngFor="let group of groups |
+                        filterByBname:{branch_name: searchText} |
+                        filterByBname:{group_name: searchGname} |
+                        filterByBname:{group_code: searchGcode} |
+                        paginate: { itemsPerPage: 10, currentPage: p }; let
+                        i=index" class="table-list">
+            <td>{{group.group_code}}</td>
+            <td>{{group.branch_name
+                            | uppercase}}</td>
+            <td>{{group.group_name |
+                            uppercase}}</td>
+
+            <td>{{group.group_location}}</td>
+            <td>{{group.group_town}}</td>
+            <td class="text-center">
+              <button class="btn btn-outline-secondary fa fa-2x fa-eye" (click)="onSelect(group)"><span class="btn-space">Members
+                  list</span></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col s12 text-center paginate">
+          <pagination-controls (pageChange)="p= $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

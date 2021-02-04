@@ -1,0 +1,101 @@
+<div class="content-area">
+    <div class="row page-header">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <a type="button" class="btn btn-custom fa fa-arrow-left" (click)="grouplist()"> Groups list</a>
+            <a type="button" class="btn btn-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+            <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item fa fa-minus" (click)="goMembers()"> Members list</a>
+              <a class="dropdown-item fa fa-minus" (click)="goSavings()"> Savings Members list</a>
+              <a class="dropdown-item fa fa-minus" (click)="goLoans()"> Loans Members list</a>
+            </div>
+          </div>
+        </div>
+        <div class="row page-content-header">
+          <h1>Dividend: Members list</h1>
+        </div>
+        <hr>
+        <div class="col-sm-12" *ngFor="let g of group">
+          <div class="row">
+            <div class="col-sm-3">
+              <label class="label" for="">Branch: </label>
+              <label class="label-description">{{g?.branch_name}}</label>
+            </div>
+            <div class="col-sm-3">
+              <label class="label" for="">Group Name: </label> <label class="label-description"> {{g?.group_name}}</label>
+            </div>
+            <div class="col-sm-3"> <label class="label" for="">Group
+                Code: </label> <label class="label-description">
+                {{g?.group_code}}</label> </div>
+  
+            <div class="col-sm-3">
+              <label class="label" for="">Group Membership </label>
+              <label class="label-description">{{_membership_count}}</label>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+      <div class="row">
+        <!--Content here-->
+        <div class="col-sm-12 search-field">
+          <form id="filter">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6"><label>Filter by member name:</label>
+                <input type="text" placeholder="Search member name" [(ngModel)]="searchMname" name="searchMname">
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6"><label>Filter
+                  by member number:</label> <input type="text" placeholder="Search member number"
+                  [(ngModel)]="searchMnumber" name="searchMnumber">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="table-responsive
+                  table-hover table-sm">
+          <table class="table table-condensed cf">
+            <thead class="table-header thead-dark">
+              <tr>
+                <th>Member number</th>
+                <th>Savings B/F</th>
+                <th>Loans B/F</th>
+                <th>Advance B/F</th>
+                <th>Principal loan</th> 
+                <th>Principal Advance</th>
+                <th>Total Payment</th>
+                <th><tr>Interests</tr> <tr> <th>Loan</th> <th>Advance</th></tr></th>
+                <th>Shares this month</th>
+                <th>Fines & Asante</th>
+                <th><tr class="text-center">Guarantors</tr> <tr class="text-center"> <th>Loan</th> <th>Advance</th></tr></th>
+              </tr>
+            </thead>
+            <tr *ngIf="members?.length == 0">
+              <td class="font-italic text-center alert alert-info" colspan="10">
+                No records found </td>
+            </tr>
+            <tr  class="table-list">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><tr><td>100.00</td><td>200.00</td></tr></td>
+              <td>0</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div> <br>
+        <div class="row">
+          <div class="col s12 text-center paginate">
+            <pagination-controls (pageChange)="p= $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

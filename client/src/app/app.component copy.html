@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <app-topnav (toggleSideBarForMe)="sideBarToggler($event)" *ngIf="auth.isLoggedIn()"></app-topnav>
+
+  <mat-drawer-container>
+    <mat-drawer class="mat-drawer" mode="side" [opened]="sideBarOpen" *ngIf="auth.isLoggedIn()">
+      <app-sidenav class="sidebar-bg"></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

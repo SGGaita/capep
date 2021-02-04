@@ -1,0 +1,38 @@
+<div class="content-area">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <a class="btn" (click)="goBack()">Back </a>
+      <a class="btn" (click)="goPrevious()">Previous </a>
+      <a class="btn" (click)="goNext()"> Next</a>
+
+    </div>
+  </div>
+  <div class="row ">
+    <div class="col-sm-12 page-header">
+      <h1>Branch Information</h1>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="table-responsive">
+            <table class=" highlight ">
+              <thead class="table-header">
+                <tr>
+                  <th>Branch name</th>
+                  <th>Branch code</th>
+                  <th>Date created</th>
+
+                </tr>
+              </thead>
+              <tr *ngFor="let b of branch" class="table-list">
+                <td>{{b.branch_name}}</td>
+                <td>{{b.branch_code}}</td>
+                <td>{{b.branch_createdat | date: "MM/dd/yy"}}</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

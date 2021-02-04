@@ -1,0 +1,29 @@
+
+.content-area{
+    position:relative;
+}
+
+.page-header, .overlay{
+    position:absolute
+}
+
+.overlay{
+    z-index: 2;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.226);
+    color: white;
+    height:100vh;
+    width: 100wh;
+}
+
+.btn{
+    padding-left:15px;
+    padding-right:20px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    margin-left: 1px;
+}
+
+

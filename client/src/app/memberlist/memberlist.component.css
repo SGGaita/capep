@@ -1,0 +1,9 @@
+.btn{
+    padding-left:15px;
+    padding-right:20px;
+}
+
+.dropdown-menu.show {
+    display: block;
+    margin-left: 1px;
+}

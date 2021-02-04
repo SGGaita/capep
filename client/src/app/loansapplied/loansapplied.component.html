@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-sm-12">
+      <div class="row">
+          <div class="col-sm-12">
+            <a type="button" class="btn btn-outline-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+                       
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+    <div class="tab-content">
+      <div id="home" class="tab-pane fade in active show">
+        <div class="col-sm-12 page-content-header">
+          <h1>Loans Management: Branch list</h1>
+        </div>
+        <mat-divider></mat-divider>
+        <!--Branches table-->
+        <div class="table table-hover table-sm">
+          <table class="responsive-table highlight">
+            <thead class="table-header">
+              <tr>
+                <th>#</th>
+                <th>Branch Name</th>
+                <th>New Loans</th>
+                <th>Accepted loans</th>
+                <th>Declined Loans</th>
+                <!--<th>Defaulted Loans</th>-->
+              </tr>
+            </thead>
+            <tr *ngIf="branchs?.length == 0">
+              <td class="font-italic text-center alert alert-info" colspan="5">
+                No records found </td>
+            </tr>
+            <tr *ngFor="let branch of branchs | paginate: { itemsPerPage:
+                10,currentPage: p }; let i=index" class="table-list">
+              <td>{{i+1}}</td>
+              <td>{{branch.branch_name}}</td>
+              <td><button class="btn btn-outline-secondary" (click)="newLoan(branch)"><i class=""></i>New </button></td>
+              <td><button class="btn btn-outline-success" (click)="acceptedLoan(branch)"><i class=""></i>Accepted </button></td>
+              <td><button class="btn btn-outline-danger" (click)="declinedLoan(branch)"><i class=""></i>Declined </button></td>
+              <!--<td><button class="btn btn-info" (click)="defaultLoan(branch)"><i class=""></i>Defaulted </button></td>-->
+
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col s12 text-center paginate">
+            <pagination-controls (pageChange)="p= $event"></pagination-controls>
+          </div>
+        </div>
+        <!--End table-->
+        <br>
+        <!--End table-->
+      </div>
+    </div>
+    <!--Tabs End-->
+    <!--Content here-->
+  </div>
+</div>

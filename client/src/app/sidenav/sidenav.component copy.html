@@ -1,0 +1,120 @@
+<!-- Sidebar -->
+<nav id="sidebar" [class.show]="navbarOpen" *ngIf="auth.isLoggedIn()">
+  <div class="sidebar-header">
+    <h3>CAPEP - KENYA</h3>
+    <h6>Organization</h6>
+  </div>
+  <ul class="list-unstyled components">
+    <li>
+      <a routerLink="/dashboard" routerLinkActive="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    </li>
+   
+     <!--<li>
+      <a routerLink="/upload" routerLinkActive="active"><i class="fas fa-tachometer-alt"></i> Upload</a>
+    </li>-->
+   
+    <li>
+      <a href="#groupSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-users"></i> Groups
+        Manager</a>
+      <ul class="collapse list-unstyled" id="groupSubmenu">
+        <li>
+          <a routerLink="/group/create"><i class="fas fa-plus"></i> New Group</a>
+        </li>
+        <li> <a routerLink="/group"><i class="fas fa-list"></i> Group List</a></li>
+        <li>
+          <a routerLink="/group/members/create"><i class="fa fa-user-plus" aria-hidden="true"></i> New Member</a> </li>
+        <li>
+          <a routerLink="/group/mgroups"><i class="fas fa-address-book"></i> Manage Members</a>
+        </li>
+
+        <li>
+            <a href="#transactionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-money"></i> Transactions</a>
+          <ul class="collapse list-unstyled" id="transactionSubmenu">
+              
+              <li>
+                  <a routerLink="/group/sgroups"> <i class="fas fa-university"></i> Savings</a>
+                </li>
+                <li>
+                  <a routerLink="/group/lgroups"><i class="fas fa-balance-scale" aria-hidden="true"></i> Loan application</a>
+                </li>
+                <li>
+                  <a routerLink="/group/dgroups"> <i class="fas fa-hands"></i> Dividend allocation</a>
+                </li>
+          </ul>        
+      </li>
+      </ul>
+    </li>
+    <li>
+      <a routerLink="/reports"><i class="fas fa-chart-line"></i> Reports</a>
+    </li>
+    <li>
+      <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+      *ngIf="auth.isAdmin()"><i class="fa fa-user" aria-hidden="true"></i> Administrator</a>
+      <ul class="collapse list-unstyled" id="adminSubmenu">
+        <li hidden>
+          <a routerLink="/admin" routerLinkActive="active"> Admin Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/admin/accounts" routerLinkActive="active">User
+            Manager</a>
+        </li>
+        <li>
+          <a routerLink="/admin/staff" routerLinkActive="active">Staff
+            Manager</a>
+        </li>
+        <li> <a href="#loansSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Loans
+          </a>
+          <div class="level3">
+            <ul class="collapse list-unstyled" id="loansSubmenu">
+              <li>
+                <a routerLink="/admin/loans" routerLinkActive="active">Loans manager</a>
+              </li>
+              <li>
+                <a routerLink="/admin/loan-parameters/loan-rates" routerLinkActive="active">Loan Parameters</a> </li>
+              <li>
+                <a routerLink="/admin/loan-parameters/repay-terms" routerLinkActive="active">Repay period manager</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report</a>
+          <div class="level3">
+            <ul class="collapse list-unstyled" id="reportSubmenu">
+              <li>
+                <a routerLink="/admin/reports/branch" routerLinkActive="active">Branch
+                  Report</a>
+              </li>
+              <li>
+                <a routerLink="/admin/reports/group" routerLinkActive="active">Group Reports</a>
+              </li>
+              <li>
+                <a routerLink="/admin/reports/member" routerLinkActive="active">Members Reports</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="#systemSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">System
+            Manager</a>
+          <div class="level3">
+            <ul class="collapse list-unstyled" id="systemSubmenu">
+              <li> <a routerLink="/admin/system-manager/branch" routerLinkActive="active">Branch manager</a>
+              </li>
+              <li>
+                <a routerLink="/admin/system-manager/group-manager" routerLinkActive="active">Group manager</a>
+              </li>
+              <li>
+                <a routerLink="/admin/system-manager/membership-manager" routerLinkActive="active">Membership
+                  manager</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a type="button" (click)="openmodal()"><i class="fas fa-power-off"></i> Logout</a>
+    </li>
+  </ul>
+</nav> 

@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-sm-12">
+      <!--Tabs Begining-->
+      <!-- <ul class="nav nav-pills">
+            <li class="active">
+              <a class="btn btn-custom" data-toggle="tab" href="#home">New
+                Applications</a>
+            </li>
+      
+            <li>
+              <a class="btn btn-custom" data-toggle="tab" href="#menu1">Accepted
+                Applications</a>
+            </li>
+      
+            <li><a class="btn btn-custom" data-toggle="tab" href="#menu2">Declined
+                Applications</a></li>
+          </ul>-->
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active show">
+          <div class="col-sm-12 page-content-header">
+            <h1>Loan Management</h1>
+          </div>
+          <hr>
+          <!--Branches table-->
+          <div class="table table-hover table-sm">
+            <table class="responsive-table highlight">
+              <thead class="table-header">
+                <tr>
+                  <th>#</th>
+                  <th>Group Name</th>
+                  <th>New Loans</th>
+                  <th>Accepted loans</th>
+                  <th>Declined Loans</th>
+                  <th>Defaulted Loans</th>
+                </tr>
+              </thead>
+              <tr *ngIf="branchs?.length == 0">
+                <td class="font-italic text-center alert alert-info" colspan="6">
+                  No records found </td>
+              </tr>
+              <tr *ngFor="let branch of branchs | paginate: { itemsPerPage:
+                      10,currentPage: p }; let i=index" class="table-list">
+                <td>{{i+1}}</td>
+                <td>{{branch.branch_name}}</td>
+                <td><button class="btn btn-info" (click)="newLoan(branch)"><i class=""></i>New </button></td>
+                <td><button class="btn btn-info" (click)="acceptedLoan(branch)"><i class=""></i>Accepted </button></td>
+                <td><button class="btn btn-info" (click)="declinedLoan(branch)"><i class=""></i>Decline </button></td>
+                <td><button class="btn btn-info" (click)="defaultLoan(branch)"><i class=""></i>Defaulted </button></td>
+  
+              </tr>
+            </table>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col s12 text-center paginate">
+              <pagination-controls (pageChange)="p= $event"></pagination-controls>
+            </div>
+          </div>
+          <!--End table-->
+          <!--End Branches Table-->
+  
+          <!--Begin table-->
+  
+          <br>
+  
+          <!--End table-->
+        </div>
+  
+      </div>
+      <!--Tabs End-->
+      <!--Content here-->
+    </div>
+  </div>
+  

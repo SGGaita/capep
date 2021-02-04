@@ -1,0 +1,203 @@
+<div class="content-area">
+  <div class="row page-header">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+            <a type="button" class="btn btn-info fa fa-arrow-left" (click)="back()">
+               Back</a>
+                <a type="button" class="btn btn-secondary fa fa-undo" (click)="refresh()"> Refresh</a>
+          <button class="btn btn-info" [useExistingCss]="true" printSectionId="print-section" ngxPrint><i
+              class="fa fa-print" aria-hidden="true"></i> Print reports</button>
+          <!-- <a type="button" class="btn btn-custom fa fa-arrow-left" (click)="memberDetails()">
+                Member Details</a>-->
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item fa fa-minus" (click)="golist()">
+                Member Records</a>
+              <a class="dropdown-item fa fa-minus" (click)="goDets()">Member's
+                loan records list</a>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!--content here-->
+
+    <div class="card-area-members shadow" id="print-section">
+      <!--Header part-->
+      <div class="row thead-dark">
+        <div class="col-sm-12 page-content-header">
+          <h1>Loan Details</h1>
+        </div>
+        <!--Begin Member-->
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <div class="col-sm-12 dashbord-tbl-description">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1>Member's Information</h1>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Group Name: <i>{{_group_name}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Name: <i> {{_member_name}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Id Number: <i>{{_member_id_no}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Membership Number: <i>{{_group_code}}{{_membership_no
+                                                  |
+                                                  number:'3.0'}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Member Since: <i>{{_dateJoined
+                                                  |
+                                                  date: 'MMMM dd, yyyy'}}</i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End member Information-->
+        <!--Finance-->
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <div class="col-sm-12 dashbord-tbl-description">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1>Loan Information</h1>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Loan amount: KShs. <i>{{_currrency_sym}}{{_loan_amount}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Loan type: <i *ngIf="_loan_type_name == 1"> Longterm</i>
+                  <i *ngIf="_loan_type_name == 2"> Advance</i>
+                </p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p *ngIf="_loan_status == 0">Status: <i class="alert alert-warning">Pending</i> </p>
+                <p *ngIf="_loan_status == 1">Status: <i class="alert alert-success">Active</i></p>
+                <p *ngIf="_loan_status == 2">Status: <i class="alert alert-danger">Declined</i></p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Date of application: <i>{{_application_date | date: 'MMMM dd, yyyy'}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+
+                <p *ngIf="_loan_status == 1">Approved on: <i>{{_application_date | date: 'MMMM dd, yyyy'}}</i></p>
+                <p *ngIf="_loan_status == 2">Declined on: <i>{{_action_date | date: 'MMMM dd, yyyy'}}</i></p>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+        <!--End Finance Information-->
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <button class="btn btn-outline-secondary fa fa-info" data-toggle="collapse" data-target="#more"> More information</button>
+        </div>
+        <div id="more" class="collapse">
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <label for="">Loan Guarantors</label>
+              <div class="col-12" *ngIf="_guarantors == 0">
+                <p>No records provided</p>
+              </div>
+              <div class="col-12">
+                <p>{{_guarantors}}</p>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <label for="">Loan Purpose</label>
+                <div class="col-12" *ngIf="_purpose == 0">
+                  <p>No records provided</p>
+                </div>
+                <div class="col-12" >
+                  <p>{{_purpose}}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+
+      </div>
+      <!--Header part end-->
+      <hr>
+      <div class="row">
+        <div class="col-sm-12">
+          <!--Accepted loans-->
+
+          <div class="row" *ngIf="_loan_status == 1">
+            <div class="col-sm-12 dashbord-tbl-description">
+              <h1>Loan Repayment History</h1>
+              <div class="table-responsive table-hover table-sm">
+                <table class="table table-condensed cf ">
+                  <thead class="table-header thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Date of payment</th>
+                      <th>Loan C/F</th>
+                      <th>Principal amount</th>
+                      <th>Interest amount</th>
+                      <th>Default amount</th>
+                     <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tr *ngIf="loan_repays?.length == 0">
+                    <td class="font-italic text-center alert alert-info" colspan="8">
+                      There is no content to display at the moment
+                    </td>
+                  </tr>
+                  <tr class="table-list"
+                    *ngFor="let rloans of loan_repays | paginate: { itemsPerPage: 10, currentPage: p } |orderBy:'-date_of_payment'; let i=index">
+                    <td>{{i+1}}</td>                                       
+                    <td>{{rloans.date_of_payment | date: "MMM dd,yyyy"}}</td>
+                    <td>{{rloans._total_bf}}</td>
+                    <td>KShs.{{rloans.principal_amount}}</td>
+                    <td>KShs.{{rloans.interest}}</td>                    
+                    <td>KShs.{{rloans.default_amount}}</td> 
+                    <td class="text-center">
+                      <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Select Action
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" (click)="onSelect(rloans)"> View Details</a>
+                          <a class="dropdown-item" > Edit</a>
+                          <a class="dropdown-item" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                          [popoverMessage]="popoverMessage" placement="left"
+                          (confirm)="removelistElement(rloans)" (cancel)="cancelClicked=true">Delete</a>
+                        </div>
+                      </div>
+                    </td>                   
+                  </tr>
+                </table>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col s12 text-center paginate">
+                  <pagination-controls (pageChange)="p= $event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Declined loans-->
+
+          <div class="row" *ngIf="_loan_status == 2">
+            <div class="col-sm-12 dashbord-tbl-description">
+              <h1>Reasons for loan decline</h1>
+            </div>
+            <div class="col-sm-12 dashbord-tbl-description">
+              <p>{{_comments}}</p>
+            </div>
+          </div>
+        </div>
+        <!--content ends here-->
+      </div>
+    </div>
+  </div>
+</div>

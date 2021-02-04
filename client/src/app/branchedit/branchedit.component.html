@@ -1,0 +1,56 @@
+<div class="content-area">
+  <mat-divider></mat-divider>
+  <div class="row page-header">
+    <h1> Update or Edit Information</h1>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="col-sm-12 alert alert-success" *ngIf="errorMsg">
+    FEEDBACK: {{errorMsg}}
+  </div>
+  <div class="col-sm-12 alert alert-success" *ngIf="successMsg">
+    FEEDBACK: {{successMsg}}
+  </div> 
+  <div class="row branch-form">
+    <div class="col-md-12 col-sm-12 ">
+      <form [formGroup]="branchUpdateForm" (ngSubmit)="updateBranch()">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Branch Name<label class="red-text">*</label></label>
+              <input type="text" id="branch_name" formControlName="branch_name" value="branch_name"
+                placeholder="Enter branch name" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Branch code<label class="red-text">*</label></label>
+              <input type="text" id="branch_code" formControlName="branch_code" value="branch_code"
+                placeholder="Enter branch code" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Description<label class="red-text"></label></label>
+              <textarea type="text" class="form-control rounded-0" row="5" value="branch_description"
+                id="branch_description" formControlName="branch_description" placeholder="Branch description" required>
+                              </textarea>
+            </div>
+          </div>
+        </div>
+
+        <!--Submit and reset button-->
+
+        <div class="row">
+          <button class="btn btn-outline-secondary fa fa-check left" type="submit"> Submit Changes</button>
+          <!--<button class="btn btn-custom fa fa-undo left" type="reset" > Reset</button>-->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

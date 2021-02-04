@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!--Content here-->
+    <div class="table-responsive table-hover table-sm">
+       <table class="table table-condensed cf">
+          <thead class="table-header thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Minimum Value</th>
+            <th>Maximum Value</th>
+            <th>Repay Period</th>
+            <th>Minimum Amounts</th>
+            <th class="text-center">Action</th>
+
+          </tr>
+        </thead>
+        <tr *ngIf="repayPeriods.length == 0" colspan="5">
+            <td class="font-italic text-center">
+              There is no content to display
+            </td>
+          </tr>
+        <tr
+          *ngFor="let repayPeriod of repayPeriods | paginate: { itemsPerPage: 10, currentPage: p }; let i=index"
+          class="table-list">
+          <td>{{i+1}}</td>
+          <td>{{repayPeriod.min_range}}</td>
+          <td>{{repayPeriod.max_range}}</td>
+          <td>{{repayPeriod.repay_period}}</td>
+          <td></td>
+          <td class="text-center">
+            <button class="btn btn-outline-secondary fa fa-2x fa-pencil-square-o" (click)="onSelectEdit(repayPeriod)"> Edit</button>
+            <button class="btn btn-outline-danger fa fa-2x fa-trash" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(repayPeriod)"
+              (cancel)="cancelClicked = true"><span class="btn-space">Delete</span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col s12 text-center paginate">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+</div>

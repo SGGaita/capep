@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-12">
+              <a type="button" class="btn btn-outline-primary fa fa-arrow-left" (click)="back()"> Back</a>
+              <a type="button" class="btn btn-outline-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+              <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item fa fa-minus" (click)="acceptedLoans()"> Accepted Loans</a>
+                <a class="dropdown-item fa fa-minus" (click)="declinedLoans()"> Declined loans</a>
+                
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+      <div class="tab-content">
+        <div id="home" class="tab-pane fade in active show">
+          <div class="col-sm-12 page-content-header">
+            <h1>New Loan Management: {{branch_name}} Branch</h1>
+          </div>
+          <mat-divider></mat-divider>
+          <!--Branches table-->
+          <div class="table table-hover table-sm">
+            <table class="responsive-table highlight">
+              <thead class="table-header">
+                <tr>
+                  <th>#</th>
+                  <th>Branch Name</th>
+                  <th>Group Name</th>
+                  <th>Action</th>
+                  
+                </tr>
+              </thead>
+              <tr *ngIf="newArr?.length == 0">
+                <td class="font-italic text-center alert alert-info" colspan="4">
+                  No records found </td>
+              </tr>
+              <tr *ngFor="let loan of newArr | paginate: { itemsPerPage:
+                      10,currentPage: p }; let i=index" class="table-list">
+                <td>{{i+1}}</td>
+                <td>{{loan.branch_name}}</td>
+                <td>{{loan.group_name}}</td>
+                <td><button class="btn btn-outline-secondary" (click)="groupnewloans(loan)"><i class=""></i> View </button></td>
+                
+  
+              </tr>
+            </table>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col s12 text-center paginate">
+              <pagination-controls (pageChange)="p= $event"></pagination-controls>
+            </div>
+          </div>
+          <!--End table-->
+          <!--End Branches Table-->
+  
+          <!--Begin table-->
+  
+          <br>
+  
+          <!--End table-->
+        </div>
+  
+      </div>
+      <!--Tabs End-->
+      <!--Content here-->
+    </div>
+  </div>
+  

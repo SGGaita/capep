@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!--Content here-->
+    <div class="table table-hover table-sm">
+      <table class="responsive-table highlight ">
+        <thead class="table-header">
+          <tr>
+            <th>Longterm loan rate </th>
+            <th>Advance rate</th>
+            <th>Default rate</th>
+            <th class="text-center">Action</th>
+
+          </tr>
+        </thead>
+        <tr *ngIf="rates.length == 0" colspan="3">
+            <td class="font-italic text-center">
+              There is no content to display
+            </td>
+          </tr>
+        <tr
+          *ngFor="let rate of rates | paginate: { itemsPerPage: 10, currentPage: p }"
+          class="table-list">
+          <td>{{rate.normal_rate}}</td>
+          <td>{{rate.advance_rate}}</td>
+          <td>{{rate.default_rate}}</td>
+          <td class="text-center">
+            <button class="btn btn-edit fa fa-2x fa-pencil-square-o" (click)="onSelectEdit(ratee)"><span
+                class="btn-space">Edit</span></button>
+            <button class="btn btn-danger fa fa-2x fa-trash" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(rate)"
+              (cancel)="cancelClicked = true"><span class="btn-space">Delete</span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col s12 text-center paginate">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,152 @@
+<ngx-spinner bdOpacity=0.2 bdColor="rgba(5,48,80,0.58)" size="default" color="#fff" type="ball-running-dots"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+  <div class="content-area">
+    <div class="row">
+      <div class="col-sm-12">
+        <button class="btn btn-info  right" (click)="back()"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+          Back</button>
+        <a type="button" class="btn btn-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+        <button class="btn btn-warning  right" (click)="previous()" disabled><i class="fa fa-angle-double-left"
+            aria-hidden="true"></i> Previous</button>
+        <button class="btn btn-warning  right" (click)="next()" disabled>Next <i class="fa fa-angle-double-right"
+            aria-hidden="true"></i></button>
+
+        <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item fa fa-pencil-square-o" (click)="goDets()"> Edit</a>
+          <a class="dropdown-item fa fa-minus" (click)="goDets()"> Member History</a>
+        </div>
+        <hr>
+      </div>
+      <div class="col-sm-12">
+        <div class="row page-content-header">
+          <h1>Update Savings Brought Forward</h1>
+          <hr>
+        </div>
+        <!--Details section-->
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card-area-members shadow">
+              <!--Header part-->
+              <div class="row thead-dark">
+                <!--Begin Member-->
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                  <div class="col-sm-12 dashbord-tbl-description">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h1>Member's Information</h1>
+                      </div>
+                      <div class="col-sm-12 info-area">
+                        <p>Group Name: <i>{{_group_name}}</i></p>
+                      </div>
+                      <div class="col-sm-12 info-area">
+                        <p>Name: <i> {{_member_name}}</i></p>
+                      </div>
+                      <div class="col-sm-12 info-area">
+                        <p>Id Number: <i>{{_member_id_no}}</i></p>
+                      </div>
+                      <div class="col-sm-12 info-area">
+                        <p>Membership Number: <i>{{_group_code}}{{_membership_no |
+                              number:'3.0'}}</i></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--End member Information-->
+                <!--Finance-->
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                  <div class="col-sm-12 dashbord-tbl-description">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <h1>Financial Information </h1>
+                      </div>
+                      <div class="col-sm-12 info-area fin">
+                        <p>Savings/Shares B/F:KShs.<i>{{_total_savings}}</i></p>
+                      </div>
+                      <div class="col-sm-12 info-area fin">
+                        <p>Loan B/F: KShs<i> {{_loan_bf}} </i> <span class="badge badge-danger" *ngIf="_default">
+                            Defaulted</span>
+                          <span class="badge badge-info" *ngIf="_new_loan"> Pending approval</span>
+                          <span class="badge badge-success" *ngIf="new_active"> Loan approved</span>
+                        </p>
+                      </div>
+                      <div class="col-sm-12 info-area fin" *ngIf="_default">
+                        <p>Loan Default amount: KShs<i> {{_default_amount}}</i></p>
+                      </div>
+                      <div class="col-sm-12 info-area fin">
+                        <p>Advance B/F: Kshs <i> {{adv_bf}} </i> <span *ngIf="adv_default"> <span
+                              class="badge badge-danger"> Defaulted</span> *(inclusive
+                            default amount {{_adv_default_amount}})</span></p>
+                      </div>
+
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <!--End Finance Information-->
+              </div>
+              <!--Header part end-->
+            </div>
+          </div>
+        </div>
+        <!--Start feedback-->
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12 alert alert-danger" *ngIf="errorMsg">
+              CAUTION: {{errorMsg}}!
+            </div>
+            <div class="col-sm-12 alert alert-success" *ngIf="successMsg">
+              FEEDBACK: {{successMsg}}
+            </div>
+          </div>
+        </div>
+        <hr>
+        <!--Start form-->
+        <div class="col-sm-12">
+          <form class="form" [formGroup]="recBFUpdateForm" (submit)="submit()">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="row">
+                <!--Hidden content-->
+                
+                
+                <!--Input fields-->
+                <div class="col-sm-12 col-md-6 col-lg-12">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <p>Fill the fields appropriately<label class="red-text">*<i>(to be used to capture only records
+                            brought
+                            forward )</i></label></p>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                      <div class="form-group">
+                        <label for="">Select Date<label class="red-text">*</label></label>
+                        <input type="date" class="form-control" id="_date" formControlName="_date" name="_date">
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                      <div class="form-group">
+                        <label for="">Savings B/F<label class="red-text">*</label></label>
+                        <input type="text" class="form-control" id="savings_bf" formControlName="savings_bf"
+                          name="savings_bf" placeholder="Enter savings amount">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!--Submit and reset button-->
+            <div class="row">
+              <button class="btn btn-success left fa fa-check" type="submit"> Submit Changes</button>
+              <button class="btn btn-danger left fa fa-undo" type="button" (click)="reset()"> Reset</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>

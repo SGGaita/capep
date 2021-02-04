@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!--Content here-->
+    <div class="col-sm-12 search-field">
+      <form id="filter">
+        <div class="row">
+          <div class="col-sm-4">
+            <label>Filter by name:</label>
+            <input type="text" placeholder="Search" [(ngModel)]="term2" name="term2">
+          </div>
+
+          <div class="col-sm-4">
+            <label>Filter by role:</label>
+            <input type="text" placeholder="Search" [(ngModel)]="term2" name="term2">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-responsive table-hover table-sm">
+      <table class="table table-condensed cf">
+        <thead class="table-header thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <!--Ngif nothing to display-->
+        <tr *ngIf="users?.length == 0">
+          <td class="font-italic text-center">
+            There is no content to display
+          </td>
+        </tr>
+        <tr *ngFor="let user of users | paginate: { itemsPerPage: 5, currentPage: p }; let i=index"
+          [class.selected]="isSelected(user)" class="table-list">
+          <td>{{i+1}}</td>
+          <td>{{user.userName}}</td>
+          <td>{{user.email | lowercase}}</td>
+          <td>{{user.phone_number}}</td>
+          <td>{{user.roles}}</td>
+          <td class="text-center">
+            <button class="btn btn-outline-secondary fa fa-2x fa-pencil" (click)="onSelectEdit(user)" disabled>
+              <span class="btn-space">Edit</span>
+            </button>
+            <button class="btn btn-outline-danger fa fa-2x fa-trash" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(user)" (cancel)="cancelClicked=
+                    true"><span class="btn-space">Delete</span></button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col s12 text-center paginate">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+</div>

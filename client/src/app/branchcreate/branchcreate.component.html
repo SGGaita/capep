@@ -1,0 +1,68 @@
+<div class="content-area">
+  <mat-divider></mat-divider>
+  <div class="row page-header">
+    <h1> Add New branch</h1>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="col-sm-12 alert alert-success" *ngIf="errorMsg">
+    FEEDBACK: {{errorMsg}}
+  </div>
+  <div class="col-sm-12 alert alert-success" *ngIf="successMsg">
+    FEEDBACK: {{successMsg}}
+  </div> 
+  <div class="row branch-form">
+    <div class="col-md-12 col-sm-12 ">
+      <form [formGroup]="branchForm" (ngSubmit)="addBranch()">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Branch Name<label class="red-text">*</label></label>
+              <input type="text" id="branch_name" formControlName="branch_name" name="branch_name" placeholder="Enter branch name"
+                required>
+              <div *ngIf="submitted && bF.branch_name.errors">
+                <div *ngIf="bF.branch_name.errors.required" class="alert alert-danger">Name is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Branch code<label class="red-text">*</label></label>
+              <input type="text" class="form-control" id="branch_code" formControlName="branch_code"
+                placeholder="Enter branch code" required>
+              <div *ngIf="submitted && bF.branch_code.errors">
+                <div *ngIf="bF.branch_code.errors.required" class="alert alert-danger">Branch code is required</div>
+                <div *ngIf="bF.branch_code.errors.minLength" class="alert alert-danger">Branch code minimum length is 3 characters</div>
+                
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form-group">
+              <label for="">Description<label class="red-text"></label></label>
+              <textarea type="text" class="form-control rounded-0" row="5" value="branch_description"
+                id="branch_description" formControlName="branch_description" placeholder="Branch description"
+                >    </textarea>
+            </div>
+          </div>
+        </div> 
+
+        <!--Submit and reset button-->
+
+        <div class="row">
+          <button class="btn btn-outline-secondary fa fa-check left" type="submit"> Submit</button>
+          <button class="btn btn-outline-danger fa fa-undo left" type="reset" > Reset</button>
+        </div>
+
+
+
+      </form>
+    </div>
+  </div>
+</div>

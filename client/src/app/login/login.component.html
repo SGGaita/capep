@@ -1,0 +1,47 @@
+<div class="row pt-5 login">
+  <div class="col-md-6 col-sm-12 mx-auto">
+    <div class="card rounded-0">
+      <div class="card-header login-header text-center">
+        
+        <h1>CAPEP - KENYA</h1>
+        <p>Enter your login credentials</p>
+        <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+        <div class="alert alert-info" *ngIf="loading">
+          <img
+            src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+          {{loadingMsg}}</div>
+        <div class="alert alert-success" *ngIf="successMsg"> {{successMsg}}</div>
+      </div>
+      <div class="card-body">
+        <form class="form" #f="ngForm" (ngSubmit)="f.form.valid && login()"
+          novalidate>
+          <div class="form-group"> <label for="">Username or Email:<label
+                class="red-text">*</label></label>
+            <input type="text" [(ngModel)]="credentials.email ||
+              credentials.userName" id="email" name="email" #email="ngModel"
+              placeholder="Enter your username or email" required/>
+            <div *ngIf="f.submitted && email.invalid" class="alert
+              alert-danger">
+              <div *ngIf="email.errors.required">Email or username is required</div>
+            </div>
+          </div>
+          <div class="form-group"> <label for="">Password:<label
+                class="red-text">*</label></label>
+            <input type="password" id="password"
+              [(ngModel)]="credentials.password" name="password"
+              #password="ngModel" placeholder="Enter your password" required/>
+            <div *ngIf="f.submitted && password.invalid" class="alert
+              alert-danger">
+              <div *ngIf="password.errors.required">Password is required</div>
+            </div>
+          </div> 
+          <button class="btn btn-secondary btn-block fa fa-sign-in" type="submit" [disabled]="!f.form.valid"> Login</button>
+          <button class="btn btn-danger btn-block fa fa-undo" type="reset"> Reset</button>
+          <a class="alert alert-info">Forgot Username  or Password?</a>
+        </form>
+      </div>
+      <div class="card-footer">&copy;All rights reserved.{{_year}}</div>
+    </div>
+  </div>
+</div>
+

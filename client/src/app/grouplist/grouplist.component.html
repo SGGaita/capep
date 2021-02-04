@@ -1,0 +1,89 @@
+<ngx-spinner bdOpacity=0.2 bdColor="rgba(5,48,80,0.58)" size="default" color="#fff" type="ball-running-dots"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<div class="content-area">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="col-sm-12">
+        
+        <div class="row page-content-header">
+          <h1>Group list</h1>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="col-sm-12 search-field">
+        <form id="filter">
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Filter by branch:</label>
+              <input type="text" placeholder="Search Branch" [(ngModel)]="searchText" name="searchText">
+            </div>
+            <div class="col-sm-4">
+              <label>Filter by group name:</label>
+              <input type="text" placeholder="Search Group by Name" [(ngModel)]="searchGname" name="searchGname">
+            </div>
+            <div class="col-sm-4">
+              <label>Filter by group code:</label>
+              <input type="text" placeholder="Search group by code" [(ngModel)]="searchGcode" name="searchGcode">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="table-responsive-md table-hover table-sm">
+        <table class="table table-condensed cf">
+          <thead class="table-header thead-dark">
+            <tr>
+              <div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>
+            </tr>
+            <tr>
+              <th>Group Number</th>
+              <th>Branch name</th>
+              <th>Group Name</th>
+              <th>Location</th>
+              <th>Town</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tr *ngIf="groups?.length == 0">
+            <td class="font-italic text-center alert alert-info" colspan="6">
+              No records found </td>
+          </tr>
+
+          <tr *ngFor="let group of groups | orderBy:'group_code' |filterByBname:{branch_name:
+            searchText} | filterByBname:{group_name:
+              searchGname} | filterByBname:{group_code:
+            searchGcode}| paginate: { itemsPerPage: 10, currentPage: p }; let
+            i=index" class="table-list">
+            <td>{{group.group_code}}</td>
+            <td>{{group.branch_name | uppercase}}</td>
+            <td>{{group.group_name | uppercase}}</td>
+            <td>{{group.group_location}}</td>
+            <td>{{group.group_town}}</td>
+            <td class="text-center">
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select Action
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="onSelect(group)">View</a>
+                  <a class="dropdown-item" (click)="onSelectEdit(group)">Edit</a>
+                  <a class="dropdown-item" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                  [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(group)"
+                  (cancel)="cancelClicked=true" *ngIf="auth.isAdmin()">Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col s12 text-center paginate">
+          <pagination-controls (pageChange)="p= $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

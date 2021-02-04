@@ -1,0 +1,34 @@
+
+      <mat-toolbar class="bg-dark" id="top-admin" *ngIf="auth.isLoggedIn()">
+        <mat-toolbar-row>
+          <button mat-icon-button class="button-style" (click)="toggleSideBar()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span class="spacer"></span>
+          <span>CAPEP KENYA</span>
+      
+          <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+            <ul fxLayout="row" fxLayoutGap="20px" class="list">
+              <li>
+                <button mat-icon-button class="button-style-list">
+                  <mat-icon>settings</mat-icon>
+                </button>
+              </li>
+              <li>
+                <button mat-button [matMenuTriggerFor]="menu" class="button-style-list">
+                  <mat-icon>person_outline</mat-icon>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item class="button-style">
+                          <mat-icon>exit_to_app</mat-icon>
+                          Sign Out
+                      </button>
+                  </mat-menu>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      
+
+

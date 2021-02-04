@@ -1,0 +1,221 @@
+<div class="content-area">
+  <div class="row page-header">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <a type="button" class="btn btn-info fa fa-arrow-left" (click)="memberDetails()">
+            Back</a>
+            <a type="button" class="btn btn-secondary fa fa-undo" (click)="refresh()"> Refresh</a>
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item fa fa-minus" (click)="golist()">
+              Member Records</a>
+            <a class="dropdown-item fa fa-minus" (click)="goDets()">Member's
+              loan records list</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 page-content-header">
+      <h1>Member Savings and loans repayment update</h1>
+    </div>
+    <hr>
+    <!--content here-->
+
+    <div class="card-area-members shadow">
+      <!--Header part-->
+      <div class="row thead-dark">
+        <!--Begin Member-->
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <div class="col-sm-12 dashbord-tbl-description">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1>Member's Information</h1>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Group Name: <i>{{_group_name}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Name: <i> {{_member_name}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Id Number: <i>{{_member_id_no}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area">
+                <p>Membership Number: <i>{{_group_code}}{{_membership_no
+                                                    |
+                                                    number:'3.0'}}</i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End member Information-->
+        <!--Finance-->
+        <div class="col-sm-12 col-md-12 col-lg-6">
+          <div class="col-sm-12 dashbord-tbl-description">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1>Financial Information</h1>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Savings/Shares B/F <i>{{_currency_sym}}{{_total_savings}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Loan B/F: KShs<i> {{_loan_bf}} </i> <span class="badge badge-danger" *ngIf="_default">
+                    Defaulted</span>
+                  <span class="badge badge-info" *ngIf="_new_loan"> Pending approval</span>
+                  <span class="badge badge-success" *ngIf="new_active"> Loan approved</span>
+                </p>
+              </div>
+              <div class="col-sm-12 info-area fin" *ngIf="_default">
+                <p>Loan Default amount: KShs<i> {{_default_amount}}</i></p>
+              </div>
+              <div class="col-sm-12 info-area fin">
+                <p>Advance B/F: Kshs <i> {{adv_bf}} </i> <span *ngIf="adv_default"> <span
+                      class="badge badge-danger"> Defaulted</span> *(inclusive
+                    default amount {{_adv_default_amount}})</span></p>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+        <!--End Finance Information-->
+      </div>
+      <!--Header part end-->
+      <hr>      
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+          <form class="form" [formGroup]="savingsupdateForm" (submit)="updateMemberSavings()">
+            <div class="row">
+              <hr>
+              <div class="col-sm-12">
+                <p>Fill the fields appropriately<label class="red-text">*</label>
+                </p>
+              </div>
+              <div class="col-sm-12">
+                <div class="col-sm-6 alert alert-danger" *ngIf="errorMsg">{{errorMsg}}
+                </div>
+                <div class="col-sm-6 alert alert-success" *ngIf="successMsg">{{successMsg}}
+                </div>
+              </div>
+              
+              <input type="text" formControlName="loan_type_id" hidden >
+              
+              <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="form-group">
+                  <label for="">Savings date<label class="red-text">*</label></label>
+                  <input type="date" [max]="maxDate" formControlName="savings_date" id="savings_date">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                            <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-lg-4" *ngIf="savingsBF">
+                <div class="input-group mb-3">
+                  <label for="">Savings BF<label class="red-text">*</label></label>
+                  <input type="text" formControlName="savings_bf" id="savings_bf" name="savings_bf"
+                    placeholder="Enter savings bf">
+
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                 <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <label for="">Total Payments<label class="red-text">*</label></label>
+                  <input type="text" formControlName="total_payments" id="total_payments" name="total_payments"
+                    placeholder="Enter total payment" >
+
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                 <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-4">
+                <div class="form-group">
+                  <label for="">Shares contribution<label class="red-text">*</label></label>
+                  <input type="text" formControlName="savings_amount" id="savings_amount"
+                    placeholder="Enter shares contribution">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-3" >
+                <div class="form-group">
+                  <label for="">Principal payment(regular loan)<label class="red-text">*</label></label>
+                  <input type="text" formControlName="principal_amount" id="principal_amount" name="principal_amount">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="">Principal payment(advance loan)<label class="red-text">*</label></label>
+                  <input type="text" formControlName="principal_adv" id="principal_adv" name="principal_adv">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-3"  >
+                <div class="form-group">
+                  <label for="">Loan interest(regular loan)<label class="red-text">*</label></label>
+                  <input type="text" formControlName="loan_interest" id="loan_interest" name="loan_interest">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-3" >
+                <div class="form-group">
+                  <label for="">Loan interest(advance loan)<label class="red-text">*</label></label>
+                  <input type="text" formControlName="adv_loan_interest" id="adv_loan_interest"
+                    name="adv_loan_interest">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+              <div class="col-sm-3" >
+                <div class="form-group">
+                  <label for="">Savings fine<label class="red-text">*</label></label>
+                  <input type="text" formControlName="fines" id="fines" name="fines">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="">Asante<label class="red-text">*</label></label>
+                  <input type="text" formControlName="asante" id="asante" name="asante">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label for="">Loan Default Fine<label class="red-text">*</label></label>
+                  <input type="text" formControlName="default" id="default" name="default">
+                  <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-3" >
+                <div class="form-group">
+                  <label for="">Advance Default Fine<label class="red-text">*</label></label>
+                 <input type="text" formControlName="default_adv" id="default_adv" name="default_adv">
+                 <!--  <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                </div>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Comments<label class="red-text">* </label></label>
+                  <textarea class="form-control" rows="4" formControlName="comments" id="comments"></textarea>
+                </div>
+              </div>
+            </div>
+            <!--Submit and reset button-->
+            <div class="row">
+              <button class="btn btn-outline-secondary left fa fa-check" type="submit" [hidden]="submit"> Submit changes</button>
+              <button class="btn btn-outline-success left" type="button" [disabled]="submit" [hidden]="!submit"  > Submitting <img
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+              </button>
+            </div>
+          </form>
+        </div>
+        <!--content ends here-->
+      </div>
+  </div>
+</div>

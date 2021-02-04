@@ -1,0 +1,114 @@
+<ngx-spinner bdOpacity=0.2 bdColor="rgba(5,48,80,0.58)" size="default" color="#fff" type="ball-running-dots"
+  [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<div class="content-area">
+  <div class="row page-header">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+          <a type="button" class="btn btn-outline-info fa fa-arrow-left" (click)="grouplist()"> Groups list</a>
+          <a type="button" class="btn btn-outline-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item fa fa-minus" (click)="goMembers()"> Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goLoans()"> Loans Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goDividends()"> Dividend Members list</a>
+          </div>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-sm-12 page-content-header">
+        <h1>Savings: Members list</h1>
+        <mat-divider></mat-divider>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12" *ngFor="let g of group">
+            <div class="row">
+              <div class="col-sm-4">
+                <label class="label" for="">Branch: </label>
+                <label class="label-description">{{g?.branch_name}}</label>
+              </div>
+              <div class="col-sm-4">
+                <label class="label" for="">Group Name: </label>
+                <label class="label-description">{{g?.group_name}}</label>
+              </div>
+              <div class="col-sm-4">
+                <label class="label" for="">Group Code: </label>
+                <label class="label-description"> {{g?.group_code}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <!--Content here-->
+      <div class="col-sm-12 search-field">
+        <form id="filter">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label>Filter by member name:</label>
+              <input type="text" placeholder="Search" [(ngModel)]="searchMname" name="searchMname">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label>Filter by member number:</label>
+              <input type="text" placeholder="Search" [(ngModel)]="searchMnumber" name="searchMnumber">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="table-responsive table-hover table-sm">
+        <table class="table table-condensed cf">
+          <thead class="table-header thead-dark">
+            <tr>
+              <th>Member number</th>
+              <th>Group</th>
+              <th>Name</th>
+              <th>Id number</th>
+              <th>Total Savings</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tr *ngIf="members?.length == 0">
+            <td class="font-italic text-center alert alert-info" colspan="7">
+              No records found </td>
+          </tr>
+          <tr *ngFor="let member of members |orderBy:'membership_no' | filterByBname:{member_name: searchMname} | filterByBname:{membership_no : searchMnumber} | paginate: {
+                        itemsPerPage: 10, currentPage: p }; let i=index" class="table-list">
+
+            <td>{{member.group_code}}{{member.membership_no
+                            | number: '3.0'}}</td>
+            <td>{{member.group_name |
+                            uppercase}}</td>
+            <td>{{member.member_name |
+                            uppercase}}</td>
+            <td>{{member.member_id_no}}</td>
+            <td>{{_savings_total}}</td>
+            <td class="text-center">
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select Action
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="onSelect(member)">New Savings</a>
+                  <a class="dropdown-item" (click)="onSelectBF(member)">Record B/F</a>
+                  <a class="dropdown-item" (click)="onSelectHistory(member)">Member Records</a>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+      </div> <br>
+      <div class="row">
+        <div class="col s12 text-center paginate">
+          <pagination-controls (pageChange)="p= $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

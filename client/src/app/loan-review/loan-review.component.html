@@ -1,0 +1,201 @@
+<div class="content-area">
+  <div class="row page-header">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-12">
+            <a type="button" class="btn btn-custom fa fa-arrow-left" (click)="back()"> Back</a>
+            <a type="button" class="btn btn-secondary fa fa-refresh" (click)="refresh()"> Refresh</a>
+          <a class="vertical-ellipsis fa fa-2x fa-bars" href="#" role="button" id="dropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item fa fa-minus" (click)="golist()">
+              Group
+              Members list</a>
+            <a class="dropdown-item fa fa-minus" (click)="goDets()">Member's
+              loan records list</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 page-content-header">
+      <h1>Loan Application Review</h1>
+    </div>
+    <hr>
+    <!--content here-->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="card-area-members shadow">
+          <!--Header part-->
+          <div class="row thead-dark">
+            <!--Begin Member-->
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="col-sm-12 dashbord-tbl-description">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h1>Member's Information</h1>
+                  </div>
+                  <div class="col-sm-12 info-area">
+                    <p>Group Name: <i>{{_group_name}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area">
+                    <p>Name: <i> {{_member_name}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area">
+                    <p>Id Number: <i>{{_member_id_no}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area">
+                    <p>Membership Number: <i>{{_group_code}}{{_membership_no
+                                                |
+                                                number:'3.0'}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area">
+                    <p>Member Since: <i>{{_dateJoined
+                                                |
+                                                orderBy:'-date_of_payment'}}</i></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--End member Information-->
+            <!--Finance-->
+            <div class="col-sm-12 col-md-12 col-lg-6">
+              <div class="col-sm-12 dashbord-tbl-description">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <h1>Loan Information</h1>
+                  </div>
+                  <div class="col-sm-12 info-area fin">
+                    <p>Savings/Shares: <i>{{_currrency_sym}}{{_total_savings}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area fin">
+                    <p>Loan amount: <i>{{_currrency_sym}}{{_loan_amount}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area fin" *ngIf="!_pendingMsg">
+                    <p>Loan type: <i> {{_type_name}}</i></p>
+                  </div>
+                  <div class="col-sm-12 info-area fin">
+                    <p>Date of application: <i>{{_application_date | date: 'MMMM dd, yyyy'}}</i></p>
+                  </div>
+                  <div class="col-sm-12">
+                    <button class="btn btn-danger" data-toggle="tab" href="#amend">Savings History</button>
+                    <button class="btn btn-danger" data-toggle="tab" href="#decline">Loans History</button>
+                  </div>
+
+                  <br>
+                </div>
+              </div>
+            </div>
+            <!--End Finance Information-->
+          </div>
+          <!--Header part end-->
+          <hr>
+          <div class="row">
+            <div class="col-sm-12">
+              <!--Tabs Begining-->
+              <ul class="nav nav-pills">
+                <li class="active">
+                  <a class="btn btn-success" data-toggle="tab" href="#amend">Approve with amendments</a>
+                </li>
+                <li>
+                  <a class="btn btn-danger" data-toggle="tab" href="#decline">Decline
+                    Application</a>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div id="amend" class="tab-pane fade in active show">
+                  <div class="col-sm-12 page-content-header">
+                    <h1>Amend loan</h1>
+                  </div>
+                  <form class="form" [formGroup]="loanReviewForm" (submit)="approvereview()">
+
+                    <div class="col-sm-12">
+                      <div class="col-sm-6 alert alert-danger" *ngIf="errorMsg">{{errorMsg}}
+                      </div>
+                      <div class="col-sm-6 alert alert-success" *ngIf="successMsg">{{successMsg}}
+                      </div>
+                    </div>
+                    <input type="text" formControlName="loan_id_fk" id="loan_id_fk" hidden>
+                    <input type="text" formControlName="member_id" id="member_id" hidden>
+                    <input type="text" formControlName="loan_status_approve" id="loan_status_approve" hidden>
+
+                    <div class="row">
+
+                      <div class="col-sm-12 col-md-12 col-lg-4">
+                        <div class="input-group mb-3">
+                          <label for="">Amount approved<label class="red-text">*</label></label>
+                          <input type="text" formControlName="loan_amount" id="loan_amount" name="loan_amount"
+                            placeholder="Enter total payment">
+                          <!--<div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('required') && loginForm.get('email').touched  " >Email address required</div>                                                 <div class=  "alert alert-danger  " *ngIf=  "loginForm.get('email').hasError('email')  " >Enter a valid email</div>-->
+                        </div>
+                      </div>                     
+
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                          <label>Comments<label class="red-text">* </label></label>
+                          <textarea class="form-control" rows="4" formControlName="comments" id="comments"></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <!--Submit and reset button-->
+                    <div class="row">
+                      <button class="btn btn-custom left" type="submit">Submit approval</button>
+                      
+                    </div>
+                  </form>
+
+                </div>
+
+                <div id="decline" class="tab-pane fade">
+                  <div class="col-sm-12 page-content-header">
+                    <h1>Decline loan</h1>
+                  </div>
+                  <form class="form" [formGroup]="loanReviewForm" (submit)="declinereview()">
+
+                    <div class="col-sm-12">
+                      <div class="col-sm-6 alert alert-danger" *ngIf="errorMsg">{{errorMsg}}
+                      </div>
+                      <div class="col-sm-6 alert alert-success" *ngIf="successMsg">{{successMsg}}
+                      </div>
+                    </div>
+                    <input type="text" formControlName="loan_id_fk" id="loan_id_fk" hidden>
+                    <input type="text" formControlName="member_id" id="member_id" hidden>
+                    <input type="text" formControlName="loan_status_decline" id="loan_status_decline" hidden>
+
+                    <div class="row">
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                          <label>Reasons for declining<label class="red-text">* </label></label>
+                          <textarea class="form-control" rows="4" formControlName="comments" id="comments"></textarea>
+                        </div>
+                      </div>
+
+                    </div>
+                    <!--Submit and reset button-->
+                    <div class="row">
+                            <button class="btn btn-custom left" type="submit">Submit</button>
+                            
+                          </div>
+
+                  </form>
+                  <hr>
+                </div>
+
+
+
+
+
+
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+        <!--content ends here-->
+      </div>
+    </div>

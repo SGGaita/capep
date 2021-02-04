@@ -1,0 +1,9 @@
+button.btn[disabled]{
+    background: gray;
+    color: black;
+    cursor: no-drop;
+}
+
+button.btn[hidden]{
+    display: none;
+}

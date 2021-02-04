@@ -1,0 +1,42 @@
+<div class="content-area">
+    <div class="row page-header">
+      <h1 mat-dialog-title> Add new repayment parameters</h1>
+    </div>
+    <hr>
+    <div class="row ">
+      <div class="col-md-12 col-sm-12 ">
+        <form [formGroup]="repayForm">
+          <div class="row">
+            <div class="col-sm-12">
+
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                  <label>Set minimum value :<label class="red-text">*</label></label>
+                <input type="text" id="min_range" formControlName="min_range" placeholder="Enter minimum range">
+              </div>
+  
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                  <label>Set maximum value :<label class="red-text">*</label></label>
+                <input type="text" id="max_range" formControlName="max_range" placeholder="Enter maximum range">
+              </div>
+  
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                  <label>Repay Period :<label class="red-text">*</label></label>
+                <input type="text" id="repay_period" formControlName="repay_period" placeholder="Enter repayment period">
+              </div>
+  
+              
+            </div>
+          </div>
+          <hr>
+  
+          <!--Submit and reset button-->
+  
+          <div class="input-field col-sm-12">
+            <button class="btn btn-custom " type="button" (click)="save()">Submit</button>
+            <button class="btn btn-custom mr-auto" type="button" (click)="close()"> Close</button>
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>

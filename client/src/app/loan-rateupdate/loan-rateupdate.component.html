@@ -1,0 +1,42 @@
+<div class="content-area">
+  <div class="row page-header">
+    <h1 mat-dialog-title> Add new rates</h1>
+  </div>
+  <hr>
+  <div class="row ">
+    <div class="col-md-12 col-sm-12 ">
+      <form [formGroup]="ratesForm">
+        <div class="row">
+          <div class="col-sm-12">
+
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <label>Set normal loan rate :<label class="red-text">*</label></label>
+              <input type="text" id="normal_rate" formControlName="normal_rate" placeholder="Enter normal rate">
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <label>Set advance loan rate :<label class="red-text">*</label></label>
+              <input type="text" id="advance_rate" formControlName="advance_rate" placeholder="Enter advance rate">
+            </div>
+
+            <div class="col-sm-12 col-md-4 col-lg-4">
+                <label>Set Default rate :<label class="red-text">*</label></label>
+              <input type="text" id="default_rate" formControlName="default_rate" placeholder="Enter default rate">
+            </div>
+
+            
+          </div>
+        </div>
+        <hr>
+
+        <!--Submit and reset button-->
+
+        <div class="input-field col-sm-12">
+          <button class="btn btn-custom " type="button" (click)="save()">Submit</button>
+          <button class="btn btn-custom mr-auto" type="button" (click)="close()"> Close</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

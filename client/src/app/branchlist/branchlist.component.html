@@ -1,0 +1,74 @@
+<div class="content-area">
+  <div class="row ">
+    <div class="col-sm-12 ">
+        
+      <!--Content here-->
+      <div class="row">
+        <div class="col-sm-12 search-field">
+          <form id="filter">
+            <div class="row">
+              <div class="col-sm-6"><label>Filter branches by name:</label>
+                <input type="text" placeholder="Search" [(ngModel)]="searchText" name="searchText">
+              </div>
+
+              <div class="col-sm-6"><label>Filter branches by code:</label>
+                <input type="text" placeholder="Search" [(ngModel)]="searchBcode" name="searchBcode">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="table-responsive table-hover table-sm">
+        <table class="table table-condensed cf">
+          <thead class="table-header thead-dark">
+            <tr>
+              <th>Branch code</th>
+              <th>Branch name</th>
+              <th>Date created</th>
+              <th>Total groups</th>
+              <th class="text-center">Action</th>
+
+            </tr>
+          </thead>
+
+          <tr *ngIf="branchs.length == 0">
+            <td class="font-italic text-center" colspan="5">
+              There is no content to display
+            </td>
+          </tr>
+          <tr *ngFor="let branch of branchs | orderBy:'branch_code' | filterByBname:{branch_name:
+              searchText} | filterByBname:{branch_code:
+                searchBcode} | paginate: { itemsPerPage: 10, currentPage: p }; let i=index"
+            [class.selected]="isSelected(branch)" class="table-list">
+            <td>{{branch.branch_code}}</td>
+            <td>{{branch.branch_name}}</td>
+            <td>{{branch.branch_createdat | date: "MM/dd/yy"}}</td>
+            <td>{{count}}</td>
+
+            <td class="text-center">
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select Action
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="onSelect(branch)">View</a>
+                  <a class="dropdown-item" (click)="onSelectEdit(branch)">Edit</a>
+                  <a class="dropdown-item" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                  [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(branch)" (cancel)="cancelClicked=
+                  true">Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col s12 text-center paginate">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

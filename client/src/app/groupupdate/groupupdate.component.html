@@ -1,0 +1,46 @@
+<div class="content-area"> 
+  <div class="row page-content-header">
+    <div>
+      <button class="btn btn-secondary fa fa-arrow-left" (click)="back()"> Back</button>
+    </div>
+    
+  </div>
+  <div class="row page-content-header"> 
+  <h1> Update Group Information</h1> 
+</div>
+<hr> 
+<div class="col-sm-6 alert alert-danger"*ngIf="errorMsg">{{errorMsg}} </div> 
+<div class="col-sm-6 alert alert-success"*ngIf="successMsg">{{successMsg}} </div> 
+<div class="row branch-form"> 
+  <div class="col-sm-12">
+      <form [formGroup]="groupUpdateForm"(ngSubmit)="updateGroup(groupUpdateForm)">
+        <div class="row">
+           <div class="col-sm-12 col-md-12 col-lg-6"> 
+             <div class="form-group"> <label>Branch Name :</label> 
+                <select class="form-control" required id="branch_id_fk"formControlName="branch_id_fk"placeholder="Select
+                  branch"> <option *ngIf="branchs.length == 0">No item to select</option>
+                  <option *ngFor="let branch of branchs; let i= index"[value]="branch.branch_id"[selected]="i
+                    == 0"> {{branch.branch_name}} </option> </select>
+               </div> </div> <div class="col-sm-12 col-md-12
+            col-lg-6"> <div class="form-group"> <label>Group Name :<label class="red-text">*</label></label>
+              <input type="text"id="group_name"formControlName="group_name"placeholder="Enter
+                full group name"> </div> </div> <div class="col-sm-12 col-md-12
+            col-lg-6"> <div class="form-group"> <label>Group code/number :<label
+                  class="red-text">*</label></label> <input type="text"id="group_code"formControlName="group_code"placeholder="Enter
+                group code"> </div> </div> <div class="col-sm-12 col-md-12
+            col-lg-6"> <div class="form-group"> <label>Location :<label class="red-text">*</label></label>
+              <input type="text"id="group_location"formControlName="group_location"placeholder="Enter
+                location"> </div> </div> <div class="col-sm-12 col-md-12
+            col-lg-6"> <div class="form-group"> <label>Town :<label class="red-text">*</label></label>
+              <input type="text"id="group_town"formControlName="group_town"placeholder="Enter
+                town"> </div> </div> <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="form-group"> <label>Group officer :</label>
+               <select class="form-control" required id="branch_id_fk"formControlName="branch_id_fk"placeholder="Assign
+                  Group Officer"> <option *ngIf="staffs.length == 0">No item to
+                    select</option> <option *ngFor="let staff of staffs; let i=
+                    index"[value]="staff.staff_id"[selected]="i == 0">
+                    {{staff.staff_name}} </option> </select> 
+            </div> </div> </div> <hr> <!--Submit and reset button--> <div class="btn-footer">
+          <div class="row"> <div class="input-field col-sm-12"> <button class="btn
+                btn-custom right"type="submit">Submit Changes</button> </div>
+          </div> </div> </form> </div> </div> </div>

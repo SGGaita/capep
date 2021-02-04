@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark shadow" color="primary" *ngIf="auth.isLoggedIn()">
+ 
+  <h3 >CAPEP - KENYA </h3><span></span>
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{'show':navbarOpen}" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link"  routerLink="/dashboard" routerLinkActive="active">Dashboard </a>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/branch" routerLinkActive="active">Branch</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/group" routerLinkActive="active">Group</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/members" routerLinkActive="active">Members</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/reports" routerLinkActive="active">Reports</a>
+          </li>
+
+     <li class="nav-item">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!auth.isLoggedIn()">
+           <a class="nav-link"  routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" (click)="auth.logout()"><i class="fa fa-user-circle-o"></i> Logout</a>
+        </li>
+      </ul>
+    
+  </div>
+</nav>

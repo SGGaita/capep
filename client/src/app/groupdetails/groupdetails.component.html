@@ -1,0 +1,101 @@
+<div class="detail-content">
+  <div class="row page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-12">
+            <h1> Detailed information on group</h1>
+          </div>
+         <div class="col-sm-12" *ngFor="let g of group">
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="">Branch: </label>
+                <label>{{g?.branch_name}}</label>
+              </div>
+
+              <div class="col-sm-4">
+                <label for="">Group Name</label>
+                <label>{{g?.group_name}}</label>
+              </div>
+
+
+              <div class="col-sm-4">
+                <label for="">Group Code</label>
+                <label>{{g?.group_code}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--Content here-->
+        <div class="col-sm-12 search-field">
+          <form id="filter">
+            <div class="row">
+              <div class="col-sm-4"><label>Filter by group name:</label>
+                <input type="text" placeholder="Search" [(ngModel)]="term2" name="term2">
+              </div>
+
+              <div class="col-sm-4"><label>Filter by member name:</label>
+                <input type="text" placeholder="Search" [(ngModel)]="term_member_name" name="term_member_name">
+              </div>
+
+              <div class="col-sm-4"><label>Filter by member number:</label>
+                <input type="text" placeholder="Search" [(ngModel)]="term_member_code" name="term_member_code">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="table table-hover table-sm">
+          <table class="responsive-table highlight ">
+            <thead class="table-header">
+              <tr>
+                <th>Member number</th>
+                <th>Group Name</th>
+                <th>Name</th>
+                <th>Id number</th>
+                <th>Phone</th>
+                <th class="text-center">Action</th>
+
+              </tr>
+            </thead>
+            <tr *ngIf="members.length == 0">
+              <td class="font-italic text-center">
+                There is no content to display
+              </td>
+            </tr>
+            <tr
+              *ngFor="let member of members | filterGroupByName:term2 | filterMemberByName:term_member_name| filterMemberByCode:term_member_code | paginate: { itemsPerPage: 10, currentPage: p }"
+              class="table-list">
+              <td>{{member.membership_no}}</td>
+              <td>{{member.group_name}}</td>
+              <td>{{member.member_name}}</td>
+              <td>{{member.member_id_no}}</td>
+              <td>{{member.phone_number}}</td>
+              <td class="text-center">
+                <button class="btn fa fa-2x fa-eye" (click)="onSelect(member)"><span
+                    class="btn-space">View</span></button>
+                <button class="btn btn-edit fa fa-2x fa-pencil-square-o" (click)="onSelectEdit(member)"><span
+                    class="btn-space">Edit</span></button>
+                <button class="btn btn-danger fa fa-2x fa-trash" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                  [popoverMessage]="popoverMessage" placement="left" (confirm)="removelistElement(member)"
+                  (cancel)="cancelClicked = true"><span class="btn-space">Delete</span></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col s12 text-center paginate">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

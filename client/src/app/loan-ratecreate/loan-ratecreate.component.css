@@ -1,0 +1,36 @@
+.section-description {
+  font-style: italic;
+  font-size: 17px;
+  color: #673ab7;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.mr-auto {
+  text-align: right;
+}
+label i {
+  color: rgb(123, 123, 123);
+  font-size: 12px;
+  text-transform: none;
+}
+
+
+._info_anchor{
+  display:block
+}
+
+._info_anchor:hover + ._info{
+  display:block;
+  cursor:help
+}
+
+._info{
+  padding: 15px;
+  border-radius: 5px;
+  display:none
+}

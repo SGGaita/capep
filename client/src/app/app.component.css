@@ -1,0 +1,36 @@
+.container-fluid{
+    width:100%;
+    padding:0;
+}
+
+/*Navigation bars Toolbar & Sidebar*/
+:host{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+mat-toolbar{
+    color: #fff;
+    font-weight: 600
+}
+
+mat-drawer-container{
+    min-height:1024px !important;
+    margin-top:20px
+}
+
+mat-drawer{
+    width:300px;
+    background: #222222
+}
+
+mat-drawer-content{
+    margin: 20px 0px 20px 0px;
+    height:fit-content;
+    overflow:visible
+}
+
+.mat-drawer{
+    background: #222222
+}
